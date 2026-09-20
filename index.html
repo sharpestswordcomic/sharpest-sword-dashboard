@@ -1,307 +1,692 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sharpest Sword Production Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * { box-sizing: border-box; }
+<title>Sharpest Sword — Production Dashboard</title>
 
-    body {
-      margin: 0;
-      padding: 30px 18px 60px;
-      background: #12151b;
-      color: #f4f4f4;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    .container {
-      max-width: 950px;
-      margin: auto;
-    }
+:root {
+  --bg: #101216;
+  --panel: #1a1e25;
+  --panel2: #222731;
+  --border: #343b47;
+  --text: #f4f4f4;
+  --muted: #a7adb8;
+  --gold: #e2b84b;
+  --green: #75cf8a;
+  --blue: #70a7ff;
+}
 
-    h1 {
-      margin-bottom: 4px;
-      font-size: 34px;
-    }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    .subtitle {
-      color: #aaa;
-      margin-top: 0;
-      margin-bottom: 30px;
-    }
+header {
+  padding: 38px 20px 30px;
+  border-bottom: 1px solid var(--border);
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-      margin-bottom: 30px;
-    }
+.header-inner {
+  max-width: 1150px;
+  margin: auto;
+}
 
-    .card {
-      background: #1d222b;
-      border: 1px solid #303743;
-      border-radius: 12px;
-      padding: 18px;
-    }
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 48px);
+}
 
-    .card-label {
-      color: #aaa;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+.tagline {
+  color: var(--muted);
+  margin: 8px 0 0;
+}
 
-    .card-number {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 5px;
-    }
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 28px 20px 70px;
+}
 
-    .section {
-      margin-top: 32px;
-    }
+h2 {
+  margin-top: 42px;
+  margin-bottom: 18px;
+}
 
-    .issue {
-      background: #1d222b;
-      border: 1px solid #303743;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
+/* SUMMARY */
 
-    .issue h3 {
-      margin-top: 0;
-    }
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
 
-    .row {
-      margin: 16px 0;
-    }
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+}
 
-    .row-top {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
+.stat-label {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
 
-    .bar {
-      height: 14px;
-      background: #343b47;
-      border-radius: 20px;
-      overflow: hidden;
-    }
+.stat-value {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 5px;
+}
 
-    .fill {
-      height: 100%;
-      background: #e2b84b;
-      border-radius: 20px;
-    }
+/* ISSUE GRID */
 
-    .complete {
-      color: #76d18b;
-      font-weight: bold;
-    }
+.issue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
 
-    .pace {
-      background: #252b35;
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 30px;
-    }
+.issue-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
 
-    .timeline {
-      border-left: 3px solid #e2b84b;
-      margin-left: 8px;
-      padding-left: 22px;
-    }
+.cover {
+  aspect-ratio: 2 / 3;
+  background: var(--panel2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .milestone {
-      margin: 22px 0;
-    }
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    .milestone strong {
-      display: block;
-      margin-bottom: 4px;
-    }
+.placeholder {
+  color: var(--muted);
+  text-align: center;
+  padding: 30px;
+  font-weight: bold;
+}
 
-    .date {
-      color: #e2b84b;
-    }
+.issue-content {
+  padding: 18px;
+}
 
-    footer {
-      margin-top: 40px;
-      color: #777;
-      font-size: 13px;
-      text-align: center;
-    }
-  </style>
+.issue-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.issue-title {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.badge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background: #333a45;
+  color: #ddd;
+}
+
+.badge.released {
+  color: var(--green);
+}
+
+.progress-row {
+  margin: 14px 0;
+}
+
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.progress-top span:last-child {
+  color: var(--muted);
+}
+
+.progress-bar {
+  height: 9px;
+  background: #343b47;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+.script-button {
+  display: block;
+  margin-top: 18px;
+  padding: 11px 14px;
+  background: var(--gold);
+  color: #111;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.script-button:hover {
+  opacity: .9;
+}
+
+/* PACE */
+
+.pace-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.pace-numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.pace-box {
+  background: var(--panel2);
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pace-number {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.pace-label {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* COLOR TOTAL */
+
+.overall {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.big-progress {
+  height: 20px;
+  margin-top: 15px;
+}
+
+/* TIMELINE */
+
+.timeline {
+  border-left: 3px solid var(--gold);
+  padding-left: 24px;
+  margin-left: 8px;
+}
+
+.timeline-item {
+  margin: 24px 0;
+}
+
+.timeline-title {
+  font-weight: bold;
+}
+
+.timeline-date {
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.timeline-note {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+footer {
+  text-align: center;
+  color: #777;
+  padding: 30px 20px 50px;
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+  .issue-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .issue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pace-numbers {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <h1>⚔️ Sharpest Sword</h1>
-  <p class="subtitle">Production Dashboard</p>
-
-  <div class="cards">
-
-    <div class="card">
-      <div class="card-label">Issues Released</div>
-      <div class="card-number">4</div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Fully Colored</div>
-      <div class="card-number">2</div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Current Issue</div>
-      <div class="card-number">#5</div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Weekly Pace</div>
-      <div class="card-number">2 / 2 / 2</div>
-    </div>
-
+<header>
+  <div class="header-inner">
+    <h1>⚔️ Sharpest Sword</h1>
+    <p class="tagline">Production Dashboard</p>
   </div>
+</header>
+
+<main>
+
+  <section class="summary">
+    <div class="stat">
+      <div class="stat-label">Issues Released</div>
+      <div class="stat-value" id="releasedCount">—</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Fully Colored</div>
+      <div class="stat-value" id="coloredCount">—</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Current Issue</div>
+      <div class="stat-value">#5</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Color Progress</div>
+      <div class="stat-value" id="colorPercent">—</div>
+    </div>
+  </section>
 
 
-  <div class="section">
+  <h2>Issues</h2>
 
-    <h2>Issue #5</h2>
+  <section class="issue-grid" id="issueGrid"></section>
 
-    <div class="issue">
 
-      <div class="row">
-        <div class="row-top">
-          <span>✏️ Sketches</span>
-          <span>17 / 24 — 71%</span>
-        </div>
+  <h2>Sustainable Weekly Pace</h2>
 
-        <div class="bar">
-          <div class="fill" style="width:71%"></div>
-        </div>
+  <section class="pace-panel">
+
+    <div>
+      The goal is consistency without burnout. Hitting the target is a
+      successful week. Anything beyond it is bonus progress.
+    </div>
+
+    <div class="pace-numbers">
+
+      <div class="pace-box">
+        <div class="pace-number">2</div>
+        <div class="pace-label">✏️ Sketch pages</div>
       </div>
 
-
-      <div class="row">
-        <div class="row-top">
-          <span>🖋️ Inks</span>
-          <span>14 / 24 — 58%</span>
-        </div>
-
-        <div class="bar">
-          <div class="fill" style="width:58%"></div>
-        </div>
+      <div class="pace-box">
+        <div class="pace-number">2</div>
+        <div class="pace-label">🖋️ Ink pages</div>
       </div>
 
-
-      <div class="row">
-        <div class="row-top">
-          <span>🎨 Colors</span>
-          <span>0 / 24 — 0%</span>
-        </div>
-
-        <div class="bar">
-          <div class="fill" style="width:0%"></div>
-        </div>
+      <div class="pace-box">
+        <div class="pace-number">2</div>
+        <div class="pace-label">🎨 Color pages</div>
       </div>
 
     </div>
 
-  </div>
+  </section>
 
 
-  <div class="section">
+  <h2>Overall Coloring</h2>
 
-    <h2>Color Progress</h2>
+  <section class="overall">
 
-    <div class="issue">
+    <div class="progress-top">
+      <strong>Issues #1–6</strong>
+      <span id="overallColorText"></span>
+    </div>
 
-      <p>Issue #1 <span class="complete">✓ Complete</span></p>
-      <p>Issue #2 <span class="complete">✓ Complete</span></p>
+    <div class="progress-bar big-progress">
+      <div
+        class="progress-fill"
+        id="overallColorBar"
+        style="width:0%">
+      </div>
+    </div>
 
-      <p>Issue #3 — 0 / 24</p>
-      <p>Issue #4 — 0 / 24</p>
-      <p>Issue #5 — 0 / 24</p>
-      <p>Issue #6 — 0 / 24</p>
+  </section>
 
-      <div class="row">
-        <div class="row-top">
-          <span>Total Coloring</span>
-          <span>48 / 144 — 33%</span>
-        </div>
 
-        <div class="bar">
-          <div class="fill" style="width:33.3%"></div>
+  <h2>Road Ahead</h2>
+
+  <section class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-title">✏️ Issue #5 Sketches Complete</div>
+      <div class="timeline-date">~Mid October 2026</div>
+      <div class="timeline-note">7 pages remaining at 2 pages/week.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-title">🖋️ Issue #5 Inks Complete</div>
+      <div class="timeline-date">~Late October 2026</div>
+      <div class="timeline-note">10 pages remaining at 2 pages/week.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-title">🏖️ Production Break</div>
+      <div class="timeline-date">Late October → Late November 2026</div>
+      <div class="timeline-note">One month off after Issue #5 production.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-title">⚔️ Issue #6 Production</div>
+      <div class="timeline-date">Begins ~Late November 2026</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-title">🎨 Issues #1–6 Fully Colored</div>
+      <div class="timeline-date">~August 2027</div>
+      <div class="timeline-note">Based on a sustainable 2 color pages/week.</div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  Sharpest Sword • Production Tracker
+</footer>
+
+
+<script>
+
+/*
+====================================================
+SHARPEST SWORD — UPDATE YOUR PROGRESS HERE
+====================================================
+
+For future progress updates, you mostly only need
+to change the numbers in this section.
+
+Example:
+
+sketches: 17
+
+becomes
+
+sketches: 19
+
+Everything below automatically recalculates.
+====================================================
+*/
+
+const issues = [
+
+  {
+    issue: 1,
+    pages: 24,
+    sketches: 24,
+    inks: 24,
+    colors: 24,
+    released: true,
+    cover: "issue-1.jpg",
+    script: "https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"
+  },
+
+  {
+    issue: 2,
+    pages: 24,
+    sketches: 24,
+    inks: 24,
+    colors: 24,
+    released: true,
+    cover: "issue-2.jpg",
+    script: "https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"
+  },
+
+  {
+    issue: 3,
+    pages: 24,
+    sketches: 24,
+    inks: 24,
+    colors: 0,
+    released: true,
+    cover: "issue-3.jpg",
+    script: "https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"
+  },
+
+  {
+    issue: 4,
+    pages: 24,
+    sketches: 24,
+    inks: 24,
+    colors: 0,
+    released: true,
+    cover: "issue-4.jpg",
+    script: "https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"
+  },
+
+  {
+    issue: 5,
+    pages: 24,
+    sketches: 17,
+    inks: 14,
+    colors: 0,
+    released: false,
+    cover: "Issue-5.jpg",
+    script: "https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"
+  },
+
+  {
+    issue: 6,
+    pages: 24,
+    sketches: 0,
+    inks: 0,
+    colors: 0,
+    released: false,
+    cover: null,
+    script: "https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"
+  },
+
+  {
+    issue: 7,
+    pages: 24,
+    sketches: 24,
+    inks: 24,
+    colors: 0,
+    released: false,
+    cover: null,
+    script: "https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"
+  }
+
+];
+
+
+/* ================================================
+   YOU DON'T NEED TO EDIT BELOW HERE
+================================================ */
+
+
+function percent(done, total) {
+  return Math.round((done / total) * 100);
+}
+
+
+function progressRow(icon, name, done, total) {
+
+  const pct = percent(done, total);
+
+  return `
+    <div class="progress-row">
+
+      <div class="progress-top">
+        <span>${icon} ${name}</span>
+        <span>${done} / ${total} — ${pct}%</span>
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          style="width:${pct}%">
         </div>
       </div>
 
     </div>
-
-  </div>
-
-
-  <div class="pace">
-
-    <h2>⚔️ Sustainable Pace</h2>
-
-    <p>
-      <strong>2 sketches</strong> +
-      <strong>2 inks</strong> +
-      <strong>2 colors</strong>
-      per week
-    </p>
-
-    <p>No need to exceed the goal. Extra pages are bonus progress.</p>
-
-  </div>
+  `;
+}
 
 
-  <div class="section">
+function buildIssues() {
 
-    <h2>Road Ahead</h2>
+  const grid = document.getElementById("issueGrid");
 
-    <div class="timeline">
+  issues.forEach(item => {
 
-      <div class="milestone">
-        <strong>Issue #5 Sketches Complete</strong>
-        <span class="date">~October 2026</span>
+    const card = document.createElement("article");
+    card.className = "issue-card";
+
+    const coverHTML = item.cover
+      ? `<img src="${item.cover}" alt="Sharpest Sword Issue ${item.issue} cover">`
+      : `<div class="placeholder">
+           ISSUE #${item.issue}<br><br>
+           Cover Coming Soon
+         </div>`;
+
+    const badge = item.released
+      ? `<span class="badge released">✓ Released</span>`
+      : `<span class="badge">In Production</span>`;
+
+    card.innerHTML = `
+
+      <div class="cover">
+        ${coverHTML}
       </div>
 
-      <div class="milestone">
-        <strong>Issue #5 Inks Complete</strong>
-        <span class="date">~Late October 2026</span>
+      <div class="issue-content">
+
+        <div class="issue-heading">
+          <div class="issue-title">Issue #${item.issue}</div>
+          ${badge}
+        </div>
+
+        ${progressRow("✏️", "Sketches", item.sketches, item.pages)}
+
+        ${progressRow("🖋️", "Inks", item.inks, item.pages)}
+
+        ${progressRow("🎨", "Colors", item.colors, item.pages)}
+
+        <a
+          class="script-button"
+          href="${item.script}"
+          target="_blank"
+          rel="noopener noreferrer">
+          📄 Open Script
+        </a>
+
       </div>
+    `;
 
-      <div class="milestone">
-        <strong>🏖️ Production Break</strong>
-        <span class="date">1 month</span>
-      </div>
+    grid.appendChild(card);
 
-      <div class="milestone">
-        <strong>Issue #6 Production Begins</strong>
-        <span class="date">~Late November 2026</span>
-      </div>
+  });
 
-      <div class="milestone">
-        <strong>Issues #1–6 Fully Colored</strong>
-        <span class="date">~August 2027</span>
-      </div>
+}
 
-    </div>
 
-  </div>
+function buildSummary() {
 
-  <footer>
-    Sharpest Sword • Jonathan & Jessica
-  </footer>
+  const released =
+    issues.filter(issue => issue.released).length;
 
-</div>
+  document.getElementById("releasedCount").textContent =
+    released;
+
+
+  const colorIssues = issues.slice(0, 6);
+
+  const fullyColored =
+    colorIssues.filter(issue =>
+      issue.colors >= issue.pages
+    ).length;
+
+  document.getElementById("coloredCount").textContent =
+    fullyColored;
+
+
+  const coloredPages =
+    colorIssues.reduce(
+      (total, issue) => total + issue.colors,
+      0
+    );
+
+  const totalColorPages =
+    colorIssues.reduce(
+      (total, issue) => total + issue.pages,
+      0
+    );
+
+  const colorPct =
+    percent(coloredPages, totalColorPages);
+
+  document.getElementById("colorPercent").textContent =
+    colorPct + "%";
+
+  document.getElementById("overallColorText").textContent =
+    `${coloredPages} / ${totalColorPages} pages — ${colorPct}%`;
+
+  document.getElementById("overallColorBar").style.width =
+    colorPct + "%";
+
+}
+
+
+buildIssues();
+buildSummary();
+
+</script>
 
 </body>
 </html>
