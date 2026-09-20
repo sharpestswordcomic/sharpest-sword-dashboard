@@ -7,684 +7,1309 @@
 <title>Sharpest Sword — Production Dashboard</title>
 
 <style>
-* { box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Libre+Franklin:wght@500;700;900&display=swap');
 
 :root {
-  --bg: #101216;
-  --panel: #1a1e25;
-  --panel2: #222731;
-  --border: #343b47;
-  --text: #f4f4f4;
-  --muted: #a7adb8;
-  --gold: #e2b84b;
-  --green: #75cf8a;
-  --blue: #70a7ff;
+    --ink: #18130f;
+    --deep-ink: #0c0b0a;
+    --paper: #ead8ad;
+    --paper-light: #f4e7c5;
+    --paper-dark: #c9ad76;
+    --red: #9e2d27;
+    --red-dark: #5e1816;
+    --gold: #d29b38;
+    --gold-light: #efc86e;
+    --green: #49684b;
+    --muted: #776a54;
+    --white: #fff9e9;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: var(--ink);
+    font-family: "Libre Franklin", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.035) 0 1px, transparent 1.5px) 0 0/9px 9px,
+        linear-gradient(135deg, #17130f, #090908 70%);
+    min-height: 100vh;
 }
 
-header {
-  padding: 38px 20px 30px;
-  border-bottom: 1px solid var(--border);
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .18;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(255,255,255,.025) 4px
+        );
 }
 
-.header-inner {
-  max-width: 1150px;
-  margin: auto;
+.container {
+    width: min(1240px, calc(100% - 28px));
+    margin: 0 auto;
+    padding: 28px 0 60px;
+}
+
+/* ---------- HEADER ---------- */
+
+.hero {
+    color: var(--white);
+    text-align: center;
+    padding: 24px 16px 18px;
+}
+
+.eyebrow {
+    color: var(--gold-light);
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .22em;
+    text-transform: uppercase;
 }
 
 h1 {
-  margin: 0;
-  font-size: clamp(30px, 5vw, 48px);
+    margin: 7px 0 6px;
+    font-family: "Alfa Slab One", Georgia, serif;
+    font-size: clamp(2.3rem, 7vw, 5.1rem);
+    line-height: .98;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    text-shadow:
+        3px 3px 0 var(--red-dark),
+        6px 6px 0 #000;
 }
 
-.tagline {
-  color: var(--muted);
-  margin: 8px 0 0;
+.subtitle {
+    margin: 14px auto 0;
+    max-width: 720px;
+    color: #d9cba9;
+    line-height: 1.5;
 }
 
-main {
-  max-width: 1150px;
-  margin: auto;
-  padding: 28px 20px 70px;
+/* ---------- GENERAL PANELS ---------- */
+
+.panel {
+    position: relative;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.24), transparent 30%),
+        var(--paper);
+    border: 4px solid var(--ink);
+    box-shadow: 7px 7px 0 rgba(0,0,0,.65);
+    margin-bottom: 24px;
 }
 
-h2 {
-  margin-top: 42px;
-  margin-bottom: 18px;
+.panel-inner {
+    padding: 22px;
 }
 
-/* SUMMARY */
-
-.summary {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+.section-title {
+    margin: 0 0 16px;
+    font-family: "Alfa Slab One", Georgia, serif;
+    text-transform: uppercase;
+    letter-spacing: .035em;
+    font-size: clamp(1.35rem, 3vw, 2rem);
 }
 
-.stat {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px;
+.section-kicker {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    border: 2px solid var(--ink);
+    padding: 5px 10px;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    transform: rotate(-1deg);
+    box-shadow: 3px 3px 0 var(--ink);
+    margin-bottom: 12px;
+}
+
+/* ---------- TRADE HERO ---------- */
+
+.trade-panel {
+    overflow: hidden;
+}
+
+.trade-panel::after {
+    content: "TRADE #1";
+    position: absolute;
+    right: -28px;
+    top: 25px;
+    transform: rotate(10deg);
+    color: rgba(158,45,39,.08);
+    font-family: "Alfa Slab One", serif;
+    font-size: 5rem;
+    pointer-events: none;
+}
+
+.trade-header {
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 26px;
+    align-items: center;
+}
+
+.trade-big {
+    font-family: "Alfa Slab One", serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    line-height: .95;
+    text-transform: uppercase;
+    margin: 2px 0 10px;
+}
+
+.trade-big span {
+    color: var(--red);
+}
+
+.trade-copy {
+    max-width: 650px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.trade-stat {
+    background: var(--ink);
+    color: var(--white);
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--red);
+    padding: 20px;
+    text-align: center;
+    transform: rotate(1deg);
+}
+
+.trade-stat .number {
+    display: block;
+    color: var(--gold-light);
+    font-family: "Alfa Slab One", serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1;
+}
+
+.trade-stat .label {
+    display: block;
+    margin-top: 7px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.quest-path {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 28px;
+    align-items: stretch;
+}
+
+.quest-step {
+    position: relative;
+    min-height: 90px;
+    background: var(--paper-light);
+    border: 3px solid var(--ink);
+    padding: 12px 7px;
+    text-align: center;
+    box-shadow: 3px 3px 0 rgba(24,19,15,.25);
+}
+
+.quest-step strong {
+    display: block;
+    font-family: "Alfa Slab One", serif;
+    font-size: 1.2rem;
+}
+
+.quest-step small {
+    display: block;
+    margin-top: 5px;
+    font-size: .67rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.25;
+}
+
+.quest-step.done {
+    background: var(--green);
+    color: white;
+}
+
+.quest-step.active {
+    background: var(--gold);
+}
+
+.quest-step.goal {
+    background: var(--red);
+    color: white;
+}
+
+/* ---------- TOP STATS ---------- */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: var(--paper-light);
+    border: 3px solid var(--ink);
+    box-shadow: 5px 5px 0 rgba(0,0,0,.55);
+    padding: 17px;
 }
 
 .stat-label {
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 12px;
+    color: var(--red-dark);
+    font-size: .72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .08em;
 }
 
 .stat-value {
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 5px;
+    margin-top: 5px;
+    font-family: "Alfa Slab One", serif;
+    font-size: clamp(1.65rem, 4vw, 2.6rem);
+    line-height: 1;
 }
 
-/* ISSUE GRID */
-
-.issue-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+.stat-note {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: .77rem;
+    font-weight: 700;
+    line-height: 1.35;
 }
 
-.issue-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.cover {
-  aspect-ratio: 2 / 3;
-  background: var(--panel2);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.placeholder {
-  color: var(--muted);
-  text-align: center;
-  padding: 30px;
-  font-weight: bold;
-}
-
-.issue-content {
-  padding: 18px;
-}
-
-.issue-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.issue-title {
-  font-size: 23px;
-  font-weight: bold;
-}
-
-.badge {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: .8px;
-  padding: 5px 8px;
-  border-radius: 20px;
-  background: #333a45;
-  color: #ddd;
-}
-
-.badge.released {
-  color: var(--green);
-}
+/* ---------- PROGRESS ---------- */
 
 .progress-row {
-  margin: 14px 0;
+    margin: 14px 0;
 }
 
-.progress-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  font-size: 14px;
-  margin-bottom: 6px;
+.progress-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 6px;
+    font-size: .78rem;
+    font-weight: 900;
 }
 
-.progress-top span:last-child {
-  color: var(--muted);
-}
-
-.progress-bar {
-  height: 9px;
-  background: #343b47;
-  border-radius: 10px;
-  overflow: hidden;
+.progress-track {
+    height: 18px;
+    border: 2px solid var(--ink);
+    background: #bfa978;
+    overflow: hidden;
 }
 
 .progress-fill {
-  height: 100%;
-  background: var(--gold);
-  border-radius: 10px;
+    height: 100%;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            var(--red),
+            var(--red) 8px,
+            #b94035 8px,
+            #b94035 16px
+        );
 }
 
-.script-button {
-  display: block;
-  margin-top: 18px;
-  padding: 11px 14px;
-  background: var(--gold);
-  color: #111;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
+.progress-fill.gold {
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            var(--gold),
+            var(--gold) 8px,
+            #e5b657 8px,
+            #e5b657 16px
+        );
 }
 
-.script-button:hover {
-  opacity: .9;
+.progress-fill.green {
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            var(--green),
+            var(--green) 8px,
+            #5d7e5e 8px,
+            #5d7e5e 16px
+        );
 }
 
-/* PACE */
+/* ---------- SNAPSHOT ---------- */
 
-.pace-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px;
+.snapshot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
 }
 
-.pace-numbers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 18px;
+.snapshot-box {
+    border: 3px solid var(--ink);
+    background: rgba(255,255,255,.2);
+    padding: 18px;
 }
 
-.pace-box {
-  background: var(--panel2);
-  padding: 18px;
-  border-radius: 10px;
-  text-align: center;
+.snapshot-box h3 {
+    margin: 0 0 12px;
+    font-family: "Alfa Slab One", serif;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+}
+
+.big-inline {
+    font-family: "Alfa Slab One", serif;
+    font-size: 1.9rem;
+    color: var(--red);
+}
+
+/* ---------- WEEKLY PACE ---------- */
+
+.pace {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.pace-item {
+    text-align: center;
+    border: 3px solid var(--ink);
+    background: var(--paper-light);
+    padding: 14px 8px;
 }
 
 .pace-number {
-  font-size: 30px;
-  font-weight: bold;
-  color: var(--gold);
+    display: block;
+    font-family: "Alfa Slab One", serif;
+    color: var(--red);
+    font-size: 2rem;
 }
 
 .pace-label {
-  color: var(--muted);
-  margin-top: 4px;
+    font-size: .72rem;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
-/* COLOR TOTAL */
+/* ---------- ISSUE CARDS ---------- */
 
-.overall {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px;
+.issue-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
 }
 
-.big-progress {
-  height: 20px;
-  margin-top: 15px;
+.issue-card {
+    position: relative;
+    background: var(--paper);
+    border: 4px solid var(--ink);
+    box-shadow: 6px 6px 0 rgba(0,0,0,.65);
+    overflow: hidden;
 }
 
-/* TIMELINE */
+.cover-wrap {
+    position: relative;
+    aspect-ratio: 2 / 1.25;
+    background:
+        radial-gradient(circle, #443a2d 1px, transparent 1px) 0 0/7px 7px,
+        #211b16;
+    overflow: hidden;
+    border-bottom: 4px solid var(--ink);
+}
+
+.cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.cover-placeholder {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    color: #d4c49d;
+    font-family: "Alfa Slab One", serif;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 20px;
+}
+
+.status-stamp {
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    z-index: 2;
+    background: var(--red);
+    color: white;
+    border: 3px solid var(--ink);
+    padding: 6px 9px;
+    font-size: .65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    transform: rotate(3deg);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.status-stamp.released {
+    background: var(--green);
+}
+
+.status-stamp.preproduction {
+    background: var(--gold);
+    color: var(--ink);
+}
+
+.status-stamp.script {
+    background: var(--paper-light);
+    color: var(--red-dark);
+}
+
+.issue-content {
+    padding: 17px;
+}
+
+.issue-title {
+    margin: 0;
+    font-family: "Alfa Slab One", serif;
+    font-size: 1.45rem;
+    text-transform: uppercase;
+}
+
+.issue-subtitle {
+    margin: 4px 0 14px;
+    color: var(--muted);
+    font-size: .75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.script-complete {
+    border: 2px dashed var(--ink);
+    background: var(--paper-light);
+    padding: 9px 10px;
+    margin: 10px 0 13px;
+    font-size: .78rem;
+    font-weight: 900;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: var(--ink);
+    color: var(--white);
+    border: 3px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--red);
+    text-decoration: none;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: .75rem;
+    letter-spacing: .04em;
+}
+
+.button:hover {
+    transform: translate(1px,1px);
+    box-shadow: 2px 2px 0 var(--red);
+}
+
+/* ---------- TIMELINE ---------- */
 
 .timeline {
-  border-left: 3px solid var(--gold);
-  padding-left: 24px;
-  margin-left: 8px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
 }
 
 .timeline-item {
-  margin: 24px 0;
-}
-
-.timeline-title {
-  font-weight: bold;
+    border-left: 6px solid var(--red);
+    background: var(--paper-light);
+    padding: 14px;
+    min-height: 125px;
 }
 
 .timeline-date {
-  color: var(--gold);
-  margin-top: 4px;
+    color: var(--red);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: .7rem;
 }
 
-.timeline-note {
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 3px;
+.timeline-item strong {
+    display: block;
+    margin: 6px 0;
+    font-family: "Alfa Slab One", serif;
+    line-height: 1.15;
 }
+
+.timeline-item p {
+    margin: 0;
+    font-size: .75rem;
+    line-height: 1.4;
+}
+
+/* ---------- FOOTER ---------- */
 
 footer {
-  text-align: center;
-  color: #777;
-  padding: 30px 20px 50px;
+    color: #a99b7d;
+    text-align: center;
+    padding: 15px 0 0;
+    font-size: .72rem;
+    font-weight: 700;
 }
 
-/* MOBILE */
+/* ---------- RESPONSIVE ---------- */
 
-@media (max-width: 850px) {
-  .issue-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 950px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-  .summary {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .issue-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .snapshot-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .quest-path {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-@media (max-width: 560px) {
-  .issue-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 700px) {
+    .container {
+        width: min(100% - 18px, 1240px);
+        padding-top: 15px;
+    }
 
-  .summary {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .trade-header {
+        grid-template-columns: 1fr;
+    }
 
-  .pace-numbers {
-    grid-template-columns: 1fr;
-  }
+    .trade-stat {
+        transform: none;
+    }
+
+    .issue-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pace {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quest-path {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .timeline {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="header-inner">
-    <h1>⚔️ Sharpest Sword</h1>
-    <p class="tagline">Production Dashboard</p>
-  </div>
+<div class="container">
+
+<header class="hero">
+    <div class="eyebrow">The Official Production Ledger</div>
+    <h1>Sharpest Sword</h1>
+    <p class="subtitle">
+        Scripts! Sketches! Inks! Colors! An irresponsibly large number of pages!
+        Follow the quest from Issue #1 all the way to Issue #18.
+    </p>
 </header>
 
-<main>
+<!-- TRADE #1 MILESTONE -->
+<section class="panel trade-panel">
+    <div class="panel-inner">
 
-  <section class="summary">
-    <div class="stat">
-      <div class="stat-label">Issues Released</div>
-      <div class="stat-value" id="releasedCount">—</div>
-    </div>
+        <div class="section-kicker">Current Quest</div>
 
-    <div class="stat">
-      <div class="stat-label">Fully Colored</div>
-      <div class="stat-value" id="coloredCount">—</div>
-    </div>
+        <div class="trade-header">
+            <div>
+                <div class="trade-big">
+                    The Road to<br><span>Trade #1</span>
+                </div>
 
-    <div class="stat">
-      <div class="stat-label">Current Issue</div>
-      <div class="stat-value">#5</div>
-    </div>
+                <p class="trade-copy">
+                    The first major milestone: six complete issues of Sharpest Sword.
+                    Four are already out in the wild. Issue #5 is in production,
+                    and Issue #6 is waiting in the wings.
+                </p>
+            </div>
 
-    <div class="stat">
-      <div class="stat-label">Color Progress</div>
-      <div class="stat-value" id="colorPercent">—</div>
-    </div>
-  </section>
+            <div class="trade-stat">
+                <span class="number" id="tradeReleased">4 / 6</span>
+                <span class="label">Issues Released</span>
+            </div>
+        </div>
 
-
-  <h2>Issues</h2>
-
-  <section class="issue-grid" id="issueGrid"></section>
-
-
-  <h2>Sustainable Weekly Pace</h2>
-
-  <section class="pace-panel">
-
-    <div>
-      The goal is consistency without burnout. Hitting the target is a
-      successful week. Anything beyond it is bonus progress.
-    </div>
-
-    <div class="pace-numbers">
-
-      <div class="pace-box">
-        <div class="pace-number">2</div>
-        <div class="pace-label">✏️ Sketch pages</div>
-      </div>
-
-      <div class="pace-box">
-        <div class="pace-number">2</div>
-        <div class="pace-label">🖋️ Ink pages</div>
-      </div>
-
-      <div class="pace-box">
-        <div class="pace-number">2</div>
-        <div class="pace-label">🎨 Color pages</div>
-      </div>
+        <div class="quest-path" id="questPath"></div>
 
     </div>
+</section>
 
-  </section>
+<!-- QUICK STATS -->
+<div class="stats-grid">
 
-
-  <h2>Overall Coloring</h2>
-
-  <section class="overall">
-
-    <div class="progress-top">
-      <strong>Issues #1–6</strong>
-      <span id="overallColorText"></span>
+    <div class="stat-card">
+        <div class="stat-label">Series Released</div>
+        <div class="stat-value" id="seriesReleased">4 / 18</div>
+        <div class="stat-note" id="seriesReleasedNote">22% of the planned saga</div>
     </div>
 
-    <div class="progress-bar big-progress">
-      <div
-        class="progress-fill"
-        id="overallColorBar"
-        style="width:0%">
-      </div>
+    <div class="stat-card">
+        <div class="stat-label">Scripts Complete</div>
+        <div class="stat-value" id="scriptsComplete">7 / 18</div>
+        <div class="stat-note" id="scriptsCompleteNote">39% of the series scripted</div>
     </div>
 
-  </section>
-
-
-  <h2>Road Ahead</h2>
-
-  <section class="timeline">
-
-    <div class="timeline-item">
-      <div class="timeline-title">✏️ Issue #5 Sketches Complete</div>
-      <div class="timeline-date">~Mid October 2026</div>
-      <div class="timeline-note">7 pages remaining at 2 pages/week.</div>
+    <div class="stat-card">
+        <div class="stat-label">Current Issue</div>
+        <div class="stat-value">#5</div>
+        <div class="stat-note">Actively being sketched and inked</div>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-title">🖋️ Issue #5 Inks Complete</div>
-      <div class="timeline-date">~Late October 2026</div>
-      <div class="timeline-note">10 pages remaining at 2 pages/week.</div>
+    <div class="stat-card">
+        <div class="stat-label">Next Milestone</div>
+        <div class="stat-value">#6</div>
+        <div class="stat-note">Finishing #6 completes Trade #1</div>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-title">🏖️ Production Break</div>
-      <div class="timeline-date">Late October → Late November 2026</div>
-      <div class="timeline-note">One month off after Issue #5 production.</div>
+</div>
+
+<!-- CURRENT PROGRESS -->
+<section class="panel">
+    <div class="panel-inner">
+
+        <div class="section-kicker">Where We Stand</div>
+        <h2 class="section-title">Current Production Snapshot</h2>
+
+        <div class="snapshot-grid">
+
+            <div class="snapshot-box">
+                <h3>⚔ Issue #5</h3>
+
+                <div class="progress-row">
+                    <div class="progress-head">
+                        <span>Sketches</span>
+                        <span id="currentSketchText"></span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill gold" id="currentSketchBar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-head">
+                        <span>Inks</span>
+                        <span id="currentInkText"></span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="currentInkBar"></div>
+                    </div>
+                </div>
+
+                <p>
+                    <span class="big-inline" id="inkRemaining"></span>
+                    ink pages remain.
+                </p>
+            </div>
+
+            <div class="snapshot-box">
+                <h3>🎨 Color Quest</h3>
+
+                <div class="progress-row">
+                    <div class="progress-head">
+                        <span>Issues #1–6</span>
+                        <span id="colorText"></span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill green" id="colorBar"></div>
+                    </div>
+                </div>
+
+                <p>
+                    <span class="big-inline" id="colorRemaining"></span>
+                    pages remain.
+                </p>
+
+                <p style="font-size:.78rem; line-height:1.45;">
+                    At the sustainable pace of two color pages per week,
+                    the six-issue color run lands around August 2027.
+                </p>
+            </div>
+
+            <div class="snapshot-box">
+                <h3>📜 The Saga</h3>
+
+                <p>
+                    <span class="big-inline">18</span>
+                    planned issues.
+                </p>
+
+                <p>
+                    Scripts are complete through
+                    <strong>Issue #7</strong>, with
+                    <strong>Issue #8 currently being written.</strong>
+                </p>
+
+                <p style="font-size:.78rem; line-height:1.45;">
+                    Trade #1 covers Issues #1–6. Once that milestone falls,
+                    the quest continues toward Issues #7–12.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- WEEKLY PACE -->
+<section class="panel">
+    <div class="panel-inner">
+
+        <div class="section-kicker">Sustainable Pace</div>
+        <h2 class="section-title">The Weekly Quest</h2>
+
+        <div class="pace">
+            <div class="pace-item">
+                <span class="pace-number">2</span>
+                <span class="pace-label">Sketch Pages</span>
+            </div>
+
+            <div class="pace-item">
+                <span class="pace-number">2</span>
+                <span class="pace-label">Ink Pages</span>
+            </div>
+
+            <div class="pace-item">
+                <span class="pace-number">2</span>
+                <span class="pace-label">Color Pages</span>
+            </div>
+
+            <div class="pace-item">
+                <span class="pace-number">6</span>
+                <span class="pace-label">Total Pages / Week</span>
+            </div>
+        </div>
+
+        <p style="margin:16px 0 0; font-size:.8rem; font-weight:700;">
+            This is the baseline—not a race. Anything above it is bonus progress.
+        </p>
+
+    </div>
+</section>
+
+<!-- ISSUES -->
+<section>
+    <div style="color:var(--white); margin:34px 0 17px;">
+        <div class="eyebrow">The Adventure So Far</div>
+        <h2 style="
+            font-family:'Alfa Slab One',serif;
+            text-transform:uppercase;
+            font-size:clamp(1.8rem,5vw,3rem);
+            margin:5px 0 0;
+        ">
+            Issue Production
+        </h2>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-title">⚔️ Issue #6 Production</div>
-      <div class="timeline-date">Begins ~Late November 2026</div>
+    <div class="issue-grid" id="issueGrid"></div>
+</section>
+
+<!-- ROAD AHEAD -->
+<section class="panel" style="margin-top:34px;">
+    <div class="panel-inner">
+
+        <div class="section-kicker">Next Chapters</div>
+        <h2 class="section-title">The Road Ahead</h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-date">~Mid October 2026</div>
+                <strong>Issue #5 Sketches Complete</strong>
+                <p>7 pages remain at the two-pages-per-week baseline.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">~Late October 2026</div>
+                <strong>Issue #5 Inks Complete</strong>
+                <p>10 ink pages remain at two pages per week.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">Late Oct → Late Nov</div>
+                <strong>Production Break</strong>
+                <p>One month off after finishing Issue #5 production.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">~Late November 2026</div>
+                <strong>Issue #6 Begins</strong>
+                <p>The final issue needed to complete the first trade.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">~August 2027</div>
+                <strong>Issues #1–6 Fully Colored</strong>
+                <p>Based on two finished color pages per week.</p>
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="timeline-item">
-      <div class="timeline-title">🎨 Issues #1–6 Fully Colored</div>
-      <div class="timeline-date">~August 2027</div>
-      <div class="timeline-note">Based on a sustainable 2 color pages/week.</div>
-    </div>
-
-  </section>
-
-</main>
+</section>
 
 <footer>
-  Sharpest Sword • Production Tracker
+    SHARPEST SWORD • PRODUCTION DASHBOARD • 18-ISSUE PLAN
 </footer>
 
+</div>
 
 <script>
 
-/*
-====================================================
-SHARPEST SWORD — UPDATE YOUR PROGRESS HERE
-====================================================
+/* ==========================================================
+   SHARPEST SWORD PRODUCTION DATA
 
-For future progress updates, you mostly only need
-to change the numbers in this section.
+   THIS IS THE SECTION TO EDIT WHEN PROGRESS CHANGES.
+   ========================================================== */
 
-Example:
-
-sketches: 17
-
-becomes
-
-sketches: 19
-
-Everything below automatically recalculates.
-====================================================
-*/
+const TOTAL_SERIES_ISSUES = 18;
+const TRADE_ONE_ISSUES = 6;
+const COLOR_PROJECT_ISSUES = 6;
 
 const issues = [
 
-  {
-    issue: 1,
-    pages: 24,
-    sketches: 24,
-    inks: 24,
-    colors: 24,
-    released: true,
-    cover: "issue-1.jpg",
-    script: "https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"
-  },
+    {
+        issue: 1,
+        status: "released",
+        scriptComplete: true,
+        pages: 24,
+        sketches: 24,
+        inks: 24,
+        colors: 24,
+        cover: "issue-1.jpg",
+        script: "https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"
+    },
 
-  {
-    issue: 2,
-    pages: 24,
-    sketches: 24,
-    inks: 24,
-    colors: 24,
-    released: true,
-    cover: "issue-2.jpg",
-    script: "https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"
-  },
+    {
+        issue: 2,
+        status: "released",
+        scriptComplete: true,
+        pages: 24,
+        sketches: 24,
+        inks: 24,
+        colors: 24,
+        cover: "issue-2.jpg",
+        script: "https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"
+    },
 
-  {
-    issue: 3,
-    pages: 24,
-    sketches: 24,
-    inks: 24,
-    colors: 0,
-    released: true,
-    cover: "issue-3.jpg",
-    script: "https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"
-  },
+    {
+        issue: 3,
+        status: "released",
+        scriptComplete: true,
+        pages: 24,
+        sketches: 24,
+        inks: 24,
+        colors: 0,
+        cover: "issue-3.jpg",
+        script: "https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"
+    },
 
-  {
-    issue: 4,
-    pages: 24,
-    sketches: 24,
-    inks: 24,
-    colors: 0,
-    released: true,
-    cover: "issue-4.jpg",
-    script: "https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"
-  },
+    {
+        issue: 4,
+        status: "released",
+        scriptComplete: true,
+        pages: 24,
+        sketches: 24,
+        inks: 24,
+        colors: 0,
+        cover: "issue-4.jpg",
+        script: "https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"
+    },
 
-  {
-    issue: 5,
-    pages: 24,
-    sketches: 17,
-    inks: 14,
-    colors: 0,
-    released: false,
-    cover: "Issue-5.jpg",
-    script: "https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"
-  },
+    {
+        issue: 5,
+        status: "production",
+        scriptComplete: true,
+        pages: 24,
+        sketches: 17,
+        inks: 14,
+        colors: 0,
+        cover: "Issue-5.jpg",
+        script: "https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"
+    },
 
-  {
-    issue: 6,
-    pages: 24,
-    sketches: 0,
-    inks: 0,
-    colors: 0,
-    released: false,
-    cover: null,
-    script: "https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"
-  },
+    {
+        issue: 6,
+        status: "preproduction",
+        scriptComplete: true,
+        pages: 24,
+        sketches: 0,
+        inks: 0,
+        colors: 0,
+        cover: null,
+        script: "https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"
+    },
 
-  {
-    issue: 7,
-    pages: 24,
-    sketches: 0,
-    inks: 0,
-    colors: 0,
-    released: false,
-    cover: null,
-    script: "https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"
-  }
+    {
+        issue: 7,
+        status: "preproduction",
+        scriptComplete: true,
+        pages: 24,
+        sketches: 24,
+        inks: 24,
+        colors: 0,
+        cover: null,
+        script: "https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"
+    },
+
+    {
+        issue: 8,
+        status: "script",
+        scriptComplete: false,
+        pages: 24,
+        sketches: 0,
+        inks: 0,
+        colors: 0,
+        cover: null,
+        script: null
+    }
 
 ];
 
 
-/* ================================================
-   YOU DON'T NEED TO EDIT BELOW HERE
-================================================ */
+/* ==========================================================
+   DASHBOARD LOGIC
+   You normally do NOT need to edit below this line.
+   ========================================================== */
 
-
-function percent(done, total) {
-  return Math.round((done / total) * 100);
+function pct(done, total) {
+    if (!total) return 0;
+    return Math.round((done / total) * 100);
 }
 
+function statusLabel(status) {
 
-function progressRow(icon, name, done, total) {
+    const labels = {
+        released: "Released!",
+        production: "In Production",
+        preproduction: "Pre-Production",
+        script: "Script in Progress"
+    };
 
-  const pct = percent(done, total);
-
-  return `
-    <div class="progress-row">
-
-      <div class="progress-top">
-        <span>${icon} ${name}</span>
-        <span>${done} / ${total} — ${pct}%</span>
-      </div>
-
-      <div class="progress-bar">
-        <div
-          class="progress-fill"
-          style="width:${pct}%">
-        </div>
-      </div>
-
-    </div>
-  `;
+    return labels[status] || status;
 }
 
+function progressRow(label, value, total, colorClass = "") {
 
-function buildIssues() {
+    const percentage = pct(value, total);
 
-  const grid = document.getElementById("issueGrid");
+    return `
+        <div class="progress-row">
+            <div class="progress-head">
+                <span>${label}</span>
+                <span>${value} / ${total} • ${percentage}%</span>
+            </div>
 
-  issues.forEach(item => {
-
-    const card = document.createElement("article");
-    card.className = "issue-card";
-
-    const coverHTML = item.cover
-      ? `<img src="${item.cover}" alt="Sharpest Sword Issue ${item.issue} cover">`
-      : `<div class="placeholder">
-           ISSUE #${item.issue}<br><br>
-           Cover Coming Soon
-         </div>`;
-
-    const badge = item.released
-      ? `<span class="badge released">✓ Released</span>`
-      : `<span class="badge">In Production</span>`;
-
-    card.innerHTML = `
-
-      <div class="cover">
-        ${coverHTML}
-      </div>
-
-      <div class="issue-content">
-
-        <div class="issue-heading">
-          <div class="issue-title">Issue #${item.issue}</div>
-          ${badge}
+            <div class="progress-track">
+                <div
+                    class="progress-fill ${colorClass}"
+                    style="width:${percentage}%"
+                ></div>
+            </div>
         </div>
-
-        ${progressRow("✏️", "Sketches", item.sketches, item.pages)}
-
-        ${progressRow("🖋️", "Inks", item.inks, item.pages)}
-
-        ${progressRow("🎨", "Colors", item.colors, item.pages)}
-
-        <a
-          class="script-button"
-          href="${item.script}"
-          target="_blank"
-          rel="noopener noreferrer">
-          📄 Open Script
-        </a>
-
-      </div>
     `;
+}
 
-    grid.appendChild(card);
+function buildIssueCards() {
 
-  });
+    const grid = document.getElementById("issueGrid");
 
+    grid.innerHTML = issues.map(issue => {
+
+        let rows = "";
+
+        /*
+        RELEASED:
+        Hide script/sketch/ink.
+        Continue showing color progress.
+        */
+        if (issue.status === "released") {
+            rows += progressRow(
+                "🎨 Colors",
+                issue.colors,
+                issue.pages,
+                "green"
+            );
+        }
+
+        /*
+        IN PRODUCTION:
+        Script is already done and disappears.
+        Show sketches, inks and colors.
+        */
+        if (issue.status === "production") {
+            rows += progressRow(
+                "✏️ Sketches",
+                issue.sketches,
+                issue.pages,
+                "gold"
+            );
+
+            rows += progressRow(
+                "🖋️ Inks",
+                issue.inks,
+                issue.pages
+            );
+
+            rows += progressRow(
+                "🎨 Colors",
+                issue.colors,
+                issue.pages,
+                "green"
+            );
+        }
+
+        /*
+        PRE-PRODUCTION:
+        Show completed script stage.
+        Hide empty production bars.
+        */
+        if (issue.status === "preproduction") {
+            rows += `
+                <div class="script-complete">
+                    📜 SCRIPT — ✓ COMPLETE
+                </div>
+            `;
+        }
+
+        /*
+        SCRIPT IN PROGRESS
+        */
+        if (issue.status === "script") {
+            rows += `
+                <div class="script-complete">
+                    📜 SCRIPT — IN PROGRESS
+                </div>
+            `;
+        }
+
+        const cover = issue.cover
+            ? `<img src="${issue.cover}" alt="Sharpest Sword Issue ${issue.issue} cover">`
+            : `
+                <div class="cover-placeholder">
+                    ISSUE #${issue.issue}<br>
+                    COVER COMING SOON
+                </div>
+            `;
+
+        const scriptButton = issue.script
+            ? `
+                <a
+                    class="button"
+                    href="${issue.script}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    📄 Open Script
+                </a>
+            `
+            : "";
+
+        return `
+            <article class="issue-card">
+
+                <div class="cover-wrap">
+
+                    <div class="status-stamp ${issue.status}">
+                        ${statusLabel(issue.status)}
+                    </div>
+
+                    ${cover}
+
+                </div>
+
+                <div class="issue-content">
+
+                    <h3 class="issue-title">
+                        Issue #${issue.issue}
+                    </h3>
+
+                    <div class="issue-subtitle">
+                        ${statusLabel(issue.status)}
+                    </div>
+
+                    ${rows}
+
+                    ${scriptButton}
+
+                </div>
+
+            </article>
+        `;
+
+    }).join("");
 }
 
 
-function buildSummary() {
+/* ---------- SUMMARY NUMBERS ---------- */
 
-  const released =
-    issues.filter(issue => issue.released).length;
+const releasedCount =
+    issues.filter(i => i.status === "released").length;
 
-  document.getElementById("releasedCount").textContent =
-    released;
+const scriptCount =
+    issues.filter(i => i.scriptComplete).length;
 
+document.getElementById("seriesReleased").textContent =
+    `${releasedCount} / ${TOTAL_SERIES_ISSUES}`;
 
-  const colorIssues = issues.slice(0, 6);
+document.getElementById("seriesReleasedNote").textContent =
+    `${pct(releasedCount, TOTAL_SERIES_ISSUES)}% of the planned saga`;
 
-  const fullyColored =
-    colorIssues.filter(issue =>
-      issue.colors >= issue.pages
+document.getElementById("scriptsComplete").textContent =
+    `${scriptCount} / ${TOTAL_SERIES_ISSUES}`;
+
+document.getElementById("scriptsCompleteNote").textContent =
+    `${pct(scriptCount, TOTAL_SERIES_ISSUES)}% of the series scripted`;
+
+const tradeReleased =
+    issues.filter(
+        i => i.issue <= TRADE_ONE_ISSUES &&
+             i.status === "released"
     ).length;
 
-  document.getElementById("coloredCount").textContent =
-    fullyColored;
+document.getElementById("tradeReleased").textContent =
+    `${tradeReleased} / ${TRADE_ONE_ISSUES}`;
 
 
-  const coloredPages =
+/* ---------- CURRENT ISSUE ---------- */
+
+const current = issues.find(i => i.issue === 5);
+
+const sketchPercent = pct(
+    current.sketches,
+    current.pages
+);
+
+const inkPercent = pct(
+    current.inks,
+    current.pages
+);
+
+document.getElementById("currentSketchText").textContent =
+    `${current.sketches} / ${current.pages} • ${sketchPercent}%`;
+
+document.getElementById("currentInkText").textContent =
+    `${current.inks} / ${current.pages} • ${inkPercent}%`;
+
+document.getElementById("currentSketchBar").style.width =
+    `${sketchPercent}%`;
+
+document.getElementById("currentInkBar").style.width =
+    `${inkPercent}%`;
+
+document.getElementById("inkRemaining").textContent =
+    current.pages - current.inks;
+
+
+/* ---------- COLOR PROJECT ---------- */
+
+const colorIssues =
+    issues.filter(i => i.issue <= COLOR_PROJECT_ISSUES);
+
+const totalColorPages =
     colorIssues.reduce(
-      (total, issue) => total + issue.colors,
-      0
+        (sum, issue) => sum + issue.pages,
+        0
     );
 
-  const totalColorPages =
+const completedColorPages =
     colorIssues.reduce(
-      (total, issue) => total + issue.pages,
-      0
+        (sum, issue) => sum + issue.colors,
+        0
     );
 
-  const colorPct =
-    percent(coloredPages, totalColorPages);
+const colorPercent =
+    pct(completedColorPages, totalColorPages);
 
-  document.getElementById("colorPercent").textContent =
-    colorPct + "%";
+document.getElementById("colorText").textContent =
+    `${completedColorPages} / ${totalColorPages} • ${colorPercent}%`;
 
-  document.getElementById("overallColorText").textContent =
-    `${coloredPages} / ${totalColorPages} pages — ${colorPct}%`;
+document.getElementById("colorBar").style.width =
+    `${colorPercent}%`;
 
-  document.getElementById("overallColorBar").style.width =
-    colorPct + "%";
+document.getElementById("colorRemaining").textContent =
+    totalColorPages - completedColorPages;
 
+
+/* ---------- TRADE QUEST PATH ---------- */
+
+function buildQuestPath() {
+
+    const path = document.getElementById("questPath");
+
+    const tradeIssues =
+        issues.filter(i => i.issue <= TRADE_ONE_ISSUES);
+
+    let html = tradeIssues.map(issue => {
+
+        let cssClass = "";
+
+        if (issue.status === "released") {
+            cssClass = "done";
+        }
+
+        if (issue.status === "production") {
+            cssClass = "active";
+        }
+
+        return `
+            <div class="quest-step ${cssClass}">
+                <strong>#${issue.issue}</strong>
+                <small>${statusLabel(issue.status)}</small>
+            </div>
+        `;
+
+    }).join("");
+
+    html += `
+        <div class="quest-step goal">
+            <strong>📕</strong>
+            <small>Trade #1<br>Complete!</small>
+        </div>
+    `;
+
+    path.innerHTML = html;
 }
 
 
-buildIssues();
-buildSummary();
+/* ---------- BUILD EVERYTHING ---------- */
+
+buildIssueCards();
+buildQuestPath();
 
 </script>
 
