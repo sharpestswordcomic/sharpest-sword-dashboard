@@ -107,6 +107,14 @@ h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif";margin:0;letter-spacing:-1p
 .road-card{background:var(--panel);border:2px solid var(--line);padding:16px}
 .road-card b{font:800 20px "Bitter";display:block;margin-bottom:5px}
 footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2px;color:#666}
+@media(max-width:600px){
+  body{
+    background-size:100% auto;
+    background-repeat:repeat-y;
+    background-attachment:scroll;
+    background-position:center top;
+  }
+}
 @media(max-width:850px){.issue-grid{grid-template-columns:repeat(2,1fr)}.stats,.quest-grid{grid-template-columns:repeat(2,1fr)}.road{grid-template-columns:1fr}.milestones{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:550px){.issue-grid{grid-template-columns:1fr}.cover,.placeholder{height:360px}.stats{grid-template-columns:1fr 1fr}.wrap{width:92vw}header{padding:20px 16px}.milestones{grid-template-columns:repeat(2,1fr)}}
 </style>
