@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharpest Sword Production Tracker — V4</title>
+<title>Sharpest Sword Production Tracker — V4.5</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Bree+Serif&family=Libre+Franklin:wght@500;700;900&display=swap');
 
@@ -28,7 +28,8 @@ body{
   background:
     radial-gradient(circle at 20% 15%,rgba(0,0,0,.035) 0 1px,transparent 1.5px) 0 0/8px 8px,
     repeating-linear-gradient(0deg,rgba(0,0,0,.018),rgba(0,0,0,.018) 1px,transparent 1px,transparent 4px),
-    var(--paper);
+    linear-gradient(rgba(216,216,211,.82),rgba(216,216,211,.82)),
+    url("background.jpg") center top / cover fixed;
 }
 .wrap{width:min(1180px,94vw);margin:auto;padding:30px 0 45px}
 header{
@@ -36,7 +37,7 @@ header{
   box-shadow:7px 7px 0 var(--line); position:relative; overflow:hidden;
 }
 header:before{
-  content:"V4";position:absolute;right:20px;top:12px;font:800 64px/1 "Bitter";
+  content:"V4.5";position:absolute;right:20px;top:12px;font:800 64px/1 "Bitter";
   color:rgba(32,32,31,.06);transform:rotate(-4deg)
 }
 h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif";margin:0;letter-spacing:-1px}
@@ -69,7 +70,7 @@ h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif";margin:0;letter-spacing:-1p
   display:inline-block;margin:8px 0;padding:5px 8px;border:2px solid currentColor;
   font:800 10px "Bitter";letter-spacing:1px;text-transform:uppercase;transform:rotate(-1deg)
 }
-.released{color:var(--green)} .production{color:var(--red)} .preproduction{color:var(--gold)} .script{color:#69645b}
+.released{color:var(--green)} .colored{color:#50677a} .production{color:var(--red)} .preproduction{color:var(--gold)} .script{color:#69645b}
 .progress-row{margin:10px 0 0}
 .progress-label{display:flex;justify-content:space-between;font-size:11px;font-weight:900;text-transform:uppercase}
 .bar{height:9px;background:#bdbdb8;border:1px solid #777;margin-top:4px}
@@ -94,6 +95,9 @@ h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif";margin:0;letter-spacing:-1p
 .timeline-sub{display:block;font:500 11px "Libre Franklin";color:var(--muted);margin-top:4px;text-transform:none}
 .timeline-body{display:none;border-top:2px solid var(--line);padding:18px}
 .timeline-body.open{display:block}
+.production-modes{border:2px solid var(--line);background:var(--panel2);padding:14px 16px;margin-bottom:20px}
+.production-modes h3{font:800 15px "Bitter";text-transform:uppercase;margin:0 0 9px;color:var(--red)}
+.production-modes p{font-size:12px;line-height:1.55;margin:4px 0}
 .t-item{display:grid;grid-template-columns:74px 1fr;gap:13px;position:relative;padding-bottom:22px}
 .t-item:not(:last-child):before{content:"";position:absolute;left:35px;top:34px;bottom:0;border-left:3px solid #888}
 .t-dot{width:70px;height:34px;display:grid;place-items:center;background:var(--ink);color:white;font:800 12px "Bitter";z-index:1}
@@ -121,15 +125,14 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
 
 <div class="stats" id="stats"></div>
 
-<h2 class="section-title">⚔ Weekly <span>Quest</span></h2>
+<h2 class="section-title">⚔ Current <span>Progress</span></h2>
 <section class="quest">
   <div class="quest-grid">
-    <div class="quest-box"><strong>2</strong><span>Sketches / week — Issue #5</span></div>
-    <div class="quest-box"><strong>2</strong><span>Inks / week — Issue #5</span></div>
-    <div class="quest-box"><strong>2–3</strong><span>Colors / week — Issue #5</span></div>
+    <div class="quest-box"><strong>2</strong><span>Sketched / week — Issue #5</span></div>
+    <div class="quest-box"><strong>2</strong><span>Inked / week — Issue #5</span></div>
+    <div class="quest-box"><strong>2–3</strong><span>Colored / week — Issue #5</span></div>
     <div class="quest-box"><strong>Mid-Nov.</strong><span>Issue #5 target</span></div>
   </div>
-  <p class="note"><b>Production modes:</b> Issue #6 uses <b>Coloring Alignment</b>: 1.5 sketches / 1.5 inks / 3–4 colors per week. From Issue #7 onward, school-year pace is 3 / 3 / 2–3; June and July use the summer pace of 2 / 2 / 2. Every new issue from #6 onward gets 2 weeks of Pre-Production.</p>
 </section>
 
 <h2 class="section-title">📚 Issues <span>#1–8</span></h2>
@@ -165,14 +168,14 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
   <div class="road-card"><b>~May 2031</b>Projected Issue #18 / end of the 18-issue production plan.</div>
 </div>
 
-<footer>SHARPEST SWORD • PRODUCTION TRACKER • V4 • 18-ISSUE PLAN</footer>
+<footer>SHARPEST SWORD • PRODUCTION TRACKER • V4.5 • 18-ISSUE PLAN</footer>
 </div>
 
 <script>
 const issues = [
  {issue:1,title:"Rat Bane",status:"released",pages:24,sketches:24,inks:24,colors:24,cover:"issue-1.jpg",script:"https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"},
  {issue:2,title:"The Talking Sword",status:"released",pages:24,sketches:24,inks:24,colors:24,cover:"issue-2.jpg",script:"https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:3,title:"Welcome to Drukhovi",status:"released",pages:24,sketches:24,inks:24,colors:1,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
+ {issue:3,title:"Welcome to Drukhovi",status:"released",pages:24,sketches:24,inks:24,colors:0,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
  {issue:4,title:"Food Fight",status:"released",pages:24,sketches:24,inks:24,colors:0,cover:"issue-4.jpg",script:"https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
  {issue:5,title:"Buried Secrets",status:"production",pages:24,sketches:17,inks:14,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
  {issue:6,title:"Field Trip",status:"preproduction",pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"},
@@ -184,9 +187,9 @@ const statusNames={released:"Released",production:"In Production",preproduction:
 const totalColor=issues.slice(0,6).reduce((a,x)=>a+x.colors,0);
 document.getElementById("stats").innerHTML=`
  <div class="stat"><b>4 / 18</b><small>Issues Released</small></div>
- <div class="stat"><b>14 / 24</b><small>Issue #5 Inks</small></div>
- <div class="stat"><b>17 / 24</b><small>Issue #5 Sketches</small></div>
- <div class="stat"><b>${totalColor} / 144</b><small>Trade #1 Colors</small></div>`;
+ <div class="stat"><b>14 / 24</b><small>Issue #5 Inked</small></div>
+ <div class="stat"><b>17 / 24</b><small>Issue #5 Sketched</small></div>
+ <div class="stat"><b>${totalColor} / 144</b><small>Trade #1 Colored</small></div>`;
 
 function progress(label,value,total){
  const pct=Math.min(100,(value/total)*100);
@@ -198,9 +201,11 @@ document.getElementById("issues").innerHTML=issues.map(i=>`
    <div class="issue-no">Issue #${i.issue}</div>
    <h3>${i.title}</h3>
    <span class="stamp ${i.status}">${statusNames[i.status]}</span>
-   ${progress("Sketches",i.sketches,i.pages)}
-   ${progress("Inks",i.inks,i.pages)}
-   ${progress("Colors",i.colors,i.pages)}
+   ${i.colors===i.pages ? `<span class="stamp colored">Colored</span>` : `
+     ${progress("Sketched",i.sketches,i.pages)}
+     ${progress("Inked",i.inks,i.pages)}
+     ${progress("Colored",i.colors,i.pages)}
+   `}
    <a class="script-link" href="${i.script}" target="_blank" rel="noopener">Open Script ↗</a>
  </article>`).join("");
 
@@ -217,19 +222,28 @@ const timeline = [
  ["#5","Buried Secrets","Art: now → late Oct. 2026","Post-Production: 3 weeks • PROJECTED RELEASE: Mid-Nov. 2026"],
  ["#6","Field Trip","Pre-Production: late Nov. 2026 • COLORING ALIGNMENT: Dec. 2026 → Mar. 2027","Post-Production + Trade Production: spring 2027 • PROJECTED JOINT RELEASE WITH TRADE #1: June 2027"],
  ["#7","What Happens in Stonefort","Pre-Production: late Jun. 2027 • Art: Jul. → Sep. 2027","Post-Production: ~1 month • PROJECTED RELEASE: Oct. 2027"],
- ["#8","Untitled","Pre-Production: Oct. 2027 • Art: Oct. → Dec. 2027","Post-Production: ~1 month • PROJECTED RELEASE: Jan. 2028"],
- ["#9","Untitled","Pre-Production: Jan./Feb. 2028 • Art: Feb. → Apr. 2028","Post-Production: ~1 month • PROJECTED RELEASE: May 2028"],
- ["#10","Untitled","Pre-Production: May 2028 • Art: May → Jul./Aug. 2028","Post-Production: ~1 month • PROJECTED RELEASE: Sep. 2028"],
- ["#11","Untitled","Pre-Production: Sep. 2028 • Art: Sep. → Nov. 2028","Post-Production: ~1 month • PROJECTED RELEASE: Dec. 2028"],
- ["#12","Untitled","Pre-Production: Dec. 2028/Jan. 2029 • Art: Jan. → Mar. 2029","Post-Production + Trade Production • PROJECTED JOINT RELEASE WITH TRADE #2: ~May 2029"],
- ["#13","Untitled","Pre-Production: May/Jun. 2029 • Art: Jun. → Aug. 2029","Post-Production: ~1 month • PROJECTED RELEASE: Sep./Oct. 2029"],
- ["#14","Untitled","Pre-Production: Oct. 2029 • Art: Oct. → Dec. 2029","Post-Production: ~1 month • PROJECTED RELEASE: Jan. 2030"],
- ["#15","Untitled","Pre-Production: Jan./Feb. 2030 • Art: Feb. → Apr. 2030","Post-Production: ~1 month • PROJECTED RELEASE: May 2030"],
- ["#16","Untitled","Pre-Production: May 2030 • Art: May → Jul./Aug. 2030","Post-Production: ~1 month • PROJECTED RELEASE: Sep. 2030"],
- ["#17","Untitled","Pre-Production: Sep. 2030 • Art: Sep. → Nov. 2030","Post-Production: ~1 month • PROJECTED RELEASE: Dec. 2030"],
- ["#18","Untitled","Pre-Production: Dec. 2030/Jan. 2031 • Art: Jan. → Mar. 2031","Post-Production + Trade Production • PROJECTED RELEASE: ~May 2031"]
+ ["#8","ISSUE 8","Pre-Production: Oct. 2027 • Art: Oct. → Dec. 2027","Post-Production: ~1 month • PROJECTED RELEASE: Jan. 2028"],
+ ["#9","ISSUE 9","Pre-Production: Jan./Feb. 2028 • Art: Feb. → Apr. 2028","Post-Production: ~1 month • PROJECTED RELEASE: May 2028"],
+ ["#10","ISSUE 10","Pre-Production: May 2028 • Art: May → Jul./Aug. 2028","Post-Production: ~1 month • PROJECTED RELEASE: Sep. 2028"],
+ ["#11","ISSUE 11","Pre-Production: Sep. 2028 • Art: Sep. → Nov. 2028","Post-Production: ~1 month • PROJECTED RELEASE: Dec. 2028"],
+ ["#12","ISSUE 12","Pre-Production: Dec. 2028/Jan. 2029 • Art: Jan. → Mar. 2029","Post-Production + Trade Production • PROJECTED JOINT RELEASE WITH TRADE #2: ~May 2029"],
+ ["#13","ISSUE 13","Pre-Production: May/Jun. 2029 • Art: Jun. → Aug. 2029","Post-Production: ~1 month • PROJECTED RELEASE: Sep./Oct. 2029"],
+ ["#14","ISSUE 14","Pre-Production: Oct. 2029 • Art: Oct. → Dec. 2029","Post-Production: ~1 month • PROJECTED RELEASE: Jan. 2030"],
+ ["#15","ISSUE 15","Pre-Production: Jan./Feb. 2030 • Art: Feb. → Apr. 2030","Post-Production: ~1 month • PROJECTED RELEASE: May 2030"],
+ ["#16","ISSUE 16","Pre-Production: May 2030 • Art: May → Jul./Aug. 2030","Post-Production: ~1 month • PROJECTED RELEASE: Sep. 2030"],
+ ["#17","ISSUE 17","Pre-Production: Sep. 2030 • Art: Sep. → Nov. 2030","Post-Production: ~1 month • PROJECTED RELEASE: Dec. 2030"],
+ ["#18","ISSUE 18","Pre-Production: Dec. 2030/Jan. 2031 • Art: Jan. → Mar. 2031","Post-Production + Trade Production • PROJECTED RELEASE: ~May 2031"]
 ];
-document.getElementById("timeline").innerHTML=timeline.map((t,idx)=>{
+const productionModes = `
+ <div class="production-modes">
+   <h3>Production Modes</h3>
+   <p><b>Issue #5:</b> 2 Sketched / 2 Inked / 2–3 Colored per week.</p>
+   <p><b>Issue #6 — Coloring Alignment:</b> 1.5 Sketched / 1.5 Inked / 3–4 Colored per week.</p>
+   <p><b>Issue #7 onward — School Year:</b> 3 Sketched / 3 Inked / 2–3 Colored per week.</p>
+   <p><b>Summer (June–July):</b> 2 Sketched / 2 Inked / 2 Colored per week.</p>
+   <p><b>Pre-Production:</b> 2 weeks before each new issue.</p>
+ </div>`;
+document.getElementById("timeline").innerHTML=productionModes + timeline.map((t,idx)=>{
  const trade=[5,11,17].includes(idx);
  const alignment=idx===5;
  return `<div class="t-item">
