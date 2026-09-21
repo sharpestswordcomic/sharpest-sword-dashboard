@@ -187,7 +187,7 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
 
 function tradeProgress(label,current,total){
  const pct=total?Math.min(100,(current/total)*100):0;
- return `<div class="trade-track"><div class="trade-row"><span>${label}</span><span>${current} / ${total}</span></div><div class="bar"><span style="width:${pct}%"></span></div></div>`;
+ return `<div class="trade-track"><div class="trade-row"><span>${label}</span><span>${current} / ${total}</span></div><div class="bar"><div class="fill" style="width:${pct}%"></div></div></div>`;
 }
 function tradeOneCard(){
  const t=issues.filter(i=>i.issue<=6);
@@ -229,7 +229,7 @@ function progress(label,value,total){
 }
 document.getElementById("issues").innerHTML=issues.map(i=>`
  <article class="issue ${i.status==="production" ? "current-priority" : ""}">
-   ${i.cover?`<img class="cover" src="${i.cover}" alt="Issue ${i.issue} cover">`:`<div class="placeholder">ISSUE #${i.issue} COVER</div>`}
+   <img class="cover" src="${i.cover || "wipcover.jpg"}" alt="${i.cover ? `Issue ${i.issue} cover` : `Work-in-progress cover for Issue ${i.issue}`}">
    <div class="issue-no">Issue #${i.issue}</div>
    <h3>${i.title}</h3>
    <span class="stamp ${i.status}">${statusNames[i.status]}</span>
@@ -239,7 +239,8 @@ document.getElementById("issues").innerHTML=issues.map(i=>`
      ${progress("Colored",i.colors,i.pages)}
    `}
    <a class="script-link" href="${i.script}" target="_blank" rel="noopener">Open Script ↗</a>
- </article>`).join("");
+ </article>
+ ${i.issue===6 ? tradeOneCard() : ""}`).join("");
 
 /*
  V4 timeline model.
