@@ -10,18 +10,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Bree+Serif&family=Libre+Franklin:wght@500;700;900&display=swap');
 
 :root {
-    --ink: #18130f;
-    --deep-ink: #0c0b0a;
-    --paper: #ead8ad;
-    --paper-light: #f4e7c5;
-    --paper-dark: #c9ad76;
-    --red: #9e2d27;
-    --red-dark: #5e1816;
-    --gold: #d29b38;
-    --gold-light: #efc86e;
-    --green: #49684b;
-    --muted: #776a54;
-    --white: #fff9e9;
+    --ink: #211d18;
+    --deep-ink: #151310;
+
+    --newsprint: #b9aa88;
+    --newsprint-dark: #96876b;
+
+    --paper: #dfcfa9;
+    --paper-light: #eadfbe;
+    --paper-dark: #bca477;
+
+    --red: #96352d;
+    --red-dark: #5e211d;
+
+    --gold: #c3933f;
+    --gold-light: #e2bd68;
+
+    --green: #536a4d;
+
+    --muted: #746852;
+    --white: #f7eed7;
 }
 
 * {
@@ -32,17 +40,39 @@ body {
     margin: 0;
     color: var(--ink);
     font-family: "Libre Franklin", Arial, sans-serif;
-    background:
+
+    background-color: var(--newsprint);
+
+    background-image:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(255,255,255,.035) 0 1px,
+            circle at 20% 30%,
+            rgba(40,32,22,.13) 0 1px,
+            transparent 1.4px
+        ),
+        radial-gradient(
+            circle at 80% 60%,
+            rgba(255,255,255,.09) 0 1px,
             transparent 1.5px
-        ) 0 0 / 9px 9px,
+        ),
+        repeating-linear-gradient(
+            4deg,
+            rgba(30,25,18,.025) 0,
+            rgba(30,25,18,.025) 1px,
+            transparent 1px,
+            transparent 5px
+        ),
         linear-gradient(
             135deg,
-            #17130f,
-            #090908 70%
+            #c2b38f,
+            #aa9a79
         );
+
+    background-size:
+        9px 9px,
+        13px 13px,
+        auto,
+        auto;
+
     min-height: 100vh;
 }
 
@@ -51,17 +81,21 @@ body::before {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    opacity: .18;
-    background-image:
+
+    background:
         repeating-linear-gradient(
-            0deg,
+            90deg,
             transparent,
-            transparent 3px,
-            rgba(255,255,255,.025) 4px
+            transparent 5px,
+            rgba(34,27,19,.018) 6px
         );
+
+    mix-blend-mode: multiply;
+    opacity: .65;
 }
 
 .container {
+    position: relative;
     width: min(1240px, calc(100% - 28px));
     margin: 0 auto;
     padding: 28px 0 60px;
@@ -73,13 +107,13 @@ body::before {
    ========================================================== */
 
 .hero {
-    color: var(--white);
+    color: var(--ink);
     text-align: center;
     padding: 25px 16px 24px;
 }
 
 .eyebrow {
-    color: var(--gold-light);
+    color: var(--red-dark);
     font-size: .75rem;
     font-weight: 900;
     letter-spacing: .18em;
@@ -93,15 +127,16 @@ h1 {
     line-height: 1.05;
     letter-spacing: .01em;
     font-weight: 400;
+
     text-shadow:
-        2px 2px 0 var(--red-dark),
-        4px 4px 0 #000;
+        1px 1px 0 rgba(255,255,255,.3),
+        2px 2px 0 rgba(91,68,43,.22);
 }
 
 .subtitle {
     margin: 13px auto 0;
     max-width: 720px;
-    color: #d9cba9;
+    color: #594e3c;
     font-family: "Bitter", Georgia, serif;
     font-size: 1rem;
     font-style: italic;
@@ -115,16 +150,26 @@ h1 {
 
 .panel {
     position: relative;
+
     background:
         radial-gradient(
-            circle at 20% 10%,
-            rgba(255,255,255,.24),
-            transparent 30%
+            circle at 15% 20%,
+            rgba(255,255,255,.19),
+            transparent 28%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 5px,
+            rgba(54,43,29,.018) 6px
         ),
         var(--paper);
 
     border: 4px solid var(--ink);
-    box-shadow: 7px 7px 0 rgba(0,0,0,.65);
+
+    box-shadow:
+        6px 6px 0 rgba(49,39,28,.42);
+
     margin-bottom: 24px;
 }
 
@@ -134,24 +179,34 @@ h1 {
 
 .section-title {
     margin: 0 0 16px;
+
     font-family: "Bitter", Georgia, serif;
     font-weight: 700;
+
     letter-spacing: .01em;
+
     font-size: clamp(1.3rem, 3vw, 1.85rem);
 }
 
 .section-kicker {
     display: inline-block;
+
     background: var(--red);
-    color: white;
+    color: var(--white);
+
     border: 2px solid var(--ink);
+
     padding: 5px 10px;
+
     font-size: .7rem;
     font-weight: 900;
     letter-spacing: .09em;
     text-transform: uppercase;
+
     transform: rotate(-1deg);
+
     box-shadow: 3px 3px 0 var(--ink);
+
     margin-bottom: 12px;
 }
 
@@ -166,28 +221,41 @@ h1 {
 
 .trade-panel::after {
     content: "TRADE #1";
+
     position: absolute;
+
     right: -28px;
     top: 25px;
+
     transform: rotate(10deg);
-    color: rgba(158,45,39,.07);
+
+    color: rgba(115,50,39,.06);
+
     font-family: "Bree Serif", Georgia, serif;
     font-size: 5rem;
+
     pointer-events: none;
 }
 
 .trade-header {
     display: grid;
+
     grid-template-columns: 1.25fr .75fr;
+
     gap: 26px;
+
     align-items: center;
 }
 
 .trade-big {
     font-family: "Bree Serif", Georgia, serif;
+
     font-size: clamp(2rem, 5vw, 3.7rem);
+
     line-height: 1;
+
     margin: 2px 0 10px;
+
     font-weight: 400;
 }
 
@@ -197,36 +265,73 @@ h1 {
 
 .trade-copy {
     max-width: 650px;
+
     line-height: 1.55;
+
     font-weight: 600;
 }
 
 .trade-stat {
-    background: var(--ink);
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgba(255,255,255,.015) 0,
+            rgba(255,255,255,.015) 3px,
+            transparent 3px,
+            transparent 7px
+        ),
+        var(--ink);
+
     color: var(--white);
+
     border: 3px solid var(--ink);
+
     box-shadow: 6px 6px 0 var(--red);
+
     padding: 20px;
+
     text-align: center;
+
     transform: rotate(1deg);
 }
 
 .trade-stat .number {
     display: block;
+
     color: var(--gold-light);
+
     font-family: "Bitter", Georgia, serif;
+
     font-weight: 700;
+
     font-size: clamp(2.7rem, 7vw, 4.8rem);
+
     line-height: 1;
 }
 
 .trade-stat .label {
     display: block;
+
     margin-top: 8px;
+
     font-size: .75rem;
     font-weight: 900;
+
     text-transform: uppercase;
+
     letter-spacing: .07em;
+}
+
+.trade-stat .percent {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #d9caa7;
+
+    font-size: .72rem;
+
+    font-weight: 700;
 }
 
 
@@ -236,35 +341,53 @@ h1 {
 
 .quest-path {
     display: grid;
+
     grid-template-columns: repeat(7, 1fr);
+
     gap: 8px;
+
     margin-top: 28px;
+
     align-items: stretch;
 }
 
 .quest-step {
     position: relative;
+
     min-height: 90px;
+
     background: var(--paper-light);
+
     border: 3px solid var(--ink);
+
     padding: 12px 7px;
+
     text-align: center;
+
     box-shadow: 3px 3px 0 rgba(24,19,15,.25);
 }
 
 .quest-step strong {
     display: block;
+
     font-family: "Bitter", Georgia, serif;
+
     font-weight: 700;
+
     font-size: 1.2rem;
 }
 
 .quest-step small {
     display: block;
+
     margin-top: 5px;
+
     font-size: .67rem;
+
     font-weight: 900;
+
     text-transform: uppercase;
+
     line-height: 1.25;
 }
 
@@ -289,39 +412,64 @@ h1 {
 
 .stats-grid {
     display: grid;
+
     grid-template-columns: repeat(4, 1fr);
+
     gap: 14px;
+
     margin-bottom: 24px;
 }
 
 .stat-card {
-    background: var(--paper-light);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 5px,
+            rgba(40,32,23,.018) 6px
+        ),
+        var(--paper-light);
+
     border: 3px solid var(--ink);
-    box-shadow: 5px 5px 0 rgba(0,0,0,.55);
+
+    box-shadow: 5px 5px 0 rgba(49,39,28,.42);
+
     padding: 17px;
 }
 
 .stat-label {
     color: var(--red-dark);
+
     font-size: .7rem;
+
     font-weight: 900;
+
     text-transform: uppercase;
+
     letter-spacing: .07em;
 }
 
 .stat-value {
     margin-top: 6px;
+
     font-family: "Bitter", Georgia, serif;
+
     font-weight: 700;
+
     font-size: clamp(1.6rem, 4vw, 2.4rem);
+
     line-height: 1;
 }
 
 .stat-note {
     margin-top: 8px;
+
     color: var(--muted);
+
     font-size: .77rem;
+
     font-weight: 700;
+
     line-height: 1.35;
 }
 
@@ -336,29 +484,38 @@ h1 {
 
 .progress-head {
     display: flex;
+
     justify-content: space-between;
+
     gap: 10px;
+
     margin-bottom: 6px;
+
     font-size: .78rem;
+
     font-weight: 900;
 }
 
 .progress-track {
     height: 18px;
+
     border: 2px solid var(--ink);
-    background: #bfa978;
+
+    background: #b29e74;
+
     overflow: hidden;
 }
 
 .progress-fill {
     height: 100%;
+
     background:
         repeating-linear-gradient(
             -45deg,
             var(--red),
             var(--red) 8px,
-            #b94035 8px,
-            #b94035 16px
+            #ad4338 8px,
+            #ad4338 16px
         );
 }
 
@@ -368,8 +525,8 @@ h1 {
             -45deg,
             var(--gold),
             var(--gold) 8px,
-            #e5b657 8px,
-            #e5b657 16px
+            #d5aa55 8px,
+            #d5aa55 16px
         );
 }
 
@@ -379,8 +536,8 @@ h1 {
             -45deg,
             var(--green),
             var(--green) 8px,
-            #5d7e5e 8px,
-            #5d7e5e 16px
+            #657d5e 8px,
+            #657d5e 16px
         );
 }
 
@@ -391,27 +548,37 @@ h1 {
 
 .snapshot-grid {
     display: grid;
+
     grid-template-columns: 1fr 1fr 1fr;
+
     gap: 18px;
 }
 
 .snapshot-box {
     border: 3px solid var(--ink);
-    background: rgba(255,255,255,.2);
+
+    background: rgba(255,255,255,.16);
+
     padding: 18px;
 }
 
 .snapshot-box h3 {
     margin: 0 0 12px;
+
     font-family: "Bitter", Georgia, serif;
+
     font-weight: 700;
+
     font-size: 1.05rem;
 }
 
 .big-inline {
     font-family: "Bitter", Georgia, serif;
+
     font-weight: 700;
+
     font-size: 1.8rem;
+
     color: var(--red);
 }
 
@@ -422,28 +589,39 @@ h1 {
 
 .pace {
     display: grid;
+
     grid-template-columns: repeat(4, 1fr);
+
     gap: 12px;
 }
 
 .pace-item {
     text-align: center;
+
     border: 3px solid var(--ink);
+
     background: var(--paper-light);
+
     padding: 14px 8px;
 }
 
 .pace-number {
     display: block;
+
     font-family: "Bitter", Georgia, serif;
+
     font-weight: 700;
+
     color: var(--red);
+
     font-size: 1.9rem;
 }
 
 .pace-label {
     font-size: .72rem;
+
     font-weight: 900;
+
     text-transform: uppercase;
 }
 
@@ -454,21 +632,36 @@ h1 {
 
 .issue-grid {
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
+
     gap: 22px;
 }
 
 .issue-card {
     position: relative;
-    background: var(--paper);
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 6px,
+            rgba(42,32,22,.018) 7px
+        ),
+        var(--paper);
+
     border: 4px solid var(--ink);
-    box-shadow: 6px 6px 0 rgba(0,0,0,.65);
+
+    box-shadow: 6px 6px 0 rgba(49,39,28,.46);
+
     overflow: hidden;
 }
 
 .cover-wrap {
     position: relative;
+
     aspect-ratio: 2 / 1.25;
+
     background:
         radial-gradient(
             circle,
@@ -478,41 +671,63 @@ h1 {
         #211b16;
 
     overflow: hidden;
+
     border-bottom: 4px solid var(--ink);
 }
 
 .cover-wrap img {
     width: 100%;
     height: 100%;
+
     object-fit: contain;
+
     display: block;
 }
 
 .cover-placeholder {
     height: 100%;
+
     display: grid;
+
     place-items: center;
+
     color: #d4c49d;
+
     font-family: "Bree Serif", Georgia, serif;
+
     font-size: 1.2rem;
+
     text-align: center;
+
     padding: 20px;
 }
 
 .status-stamp {
     position: absolute;
+
     top: 10px;
     right: 8px;
+
     z-index: 2;
+
     background: var(--red);
+
     color: white;
+
     border: 3px solid var(--ink);
+
     padding: 6px 9px;
+
     font-size: .65rem;
+
     font-weight: 900;
+
     text-transform: uppercase;
+
     letter-spacing: .05em;
+
     transform: rotate(3deg);
+
     box-shadow: 3px 3px 0 var(--ink);
 }
 
@@ -522,11 +737,13 @@ h1 {
 
 .status-stamp.preproduction {
     background: var(--gold);
+
     color: var(--ink);
 }
 
 .status-stamp.script {
     background: var(--paper-light);
+
     color: var(--red-dark);
 }
 
@@ -536,47 +753,87 @@ h1 {
 
 .issue-title {
     margin: 0;
+
     font-family: "Bree Serif", Georgia, serif;
+
     font-weight: 400;
+
     font-size: 1.45rem;
+}
+
+.issue-name {
+    margin: 3px 0 5px;
+
+    font-family: "Bitter", Georgia, serif;
+
+    font-size: .98rem;
+
+    font-weight: 700;
+
+    color: var(--red-dark);
 }
 
 .issue-subtitle {
     margin: 4px 0 14px;
+
     color: var(--muted);
-    font-size: .75rem;
+
+    font-size: .7rem;
+
     font-weight: 900;
+
     text-transform: uppercase;
+
+    letter-spacing: .04em;
 }
 
 .script-complete {
     border: 2px dashed var(--ink);
+
     background: var(--paper-light);
+
     padding: 9px 10px;
+
     margin: 10px 0 13px;
+
     font-size: .78rem;
+
     font-weight: 900;
 }
 
 .button {
     display: block;
+
     width: 100%;
+
     margin-top: 14px;
+
     padding: 10px 12px;
+
     background: var(--ink);
+
     color: var(--white);
+
     border: 3px solid var(--ink);
+
     box-shadow: 3px 3px 0 var(--red);
+
     text-decoration: none;
+
     text-align: center;
+
     font-weight: 900;
+
     text-transform: uppercase;
+
     font-size: .75rem;
+
     letter-spacing: .04em;
 }
 
 .button:hover {
     transform: translate(1px,1px);
+
     box-shadow: 2px 2px 0 var(--red);
 }
 
@@ -587,35 +844,63 @@ h1 {
 
 .timeline {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+
+    grid-template-columns: repeat(3, 1fr);
+
     gap: 12px;
 }
 
 .timeline-item {
     border-left: 6px solid var(--red);
+
     background: var(--paper-light);
+
     padding: 14px;
+
     min-height: 125px;
+}
+
+.timeline-item.omnibus {
+    background: var(--ink);
+
+    color: var(--white);
+
+    border-left-color: var(--gold);
+
+    box-shadow: 4px 4px 0 var(--red);
 }
 
 .timeline-date {
     color: var(--red);
+
     font-weight: 900;
+
     text-transform: uppercase;
+
     font-size: .7rem;
+}
+
+.timeline-item.omnibus .timeline-date {
+    color: var(--gold-light);
 }
 
 .timeline-item strong {
     display: block;
+
     margin: 6px 0;
+
     font-family: "Bitter", Georgia, serif;
+
     font-weight: 700;
+
     line-height: 1.15;
 }
 
 .timeline-item p {
     margin: 0;
+
     font-size: .75rem;
+
     line-height: 1.4;
 }
 
@@ -625,11 +910,17 @@ h1 {
    ========================================================== */
 
 footer {
-    color: #a99b7d;
+    color: #514837;
+
     text-align: center;
+
     padding: 15px 0 0;
+
     font-size: .72rem;
-    font-weight: 700;
+
+    font-weight: 900;
+
+    letter-spacing: .04em;
 }
 
 
@@ -664,6 +955,7 @@ footer {
 
     .container {
         width: min(100% - 18px, 1240px);
+
         padding-top: 15px;
     }
 
@@ -691,8 +983,10 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -714,14 +1008,14 @@ footer {
     </h1>
 
     <p class="subtitle">
-        The sword is sharp. The wielder is not.
+        The sword is sharp. He is not.
     </p>
 
 </header>
 
 
 <!-- ========================================================
-     TRADE #1 MILESTONE
+     TRADE #1
      ======================================================== -->
 
 <section class="panel trade-panel">
@@ -750,6 +1044,7 @@ footer {
 
             </div>
 
+
             <div class="trade-stat">
 
                 <span
@@ -763,9 +1058,17 @@ footer {
                     Issues Released
                 </span>
 
+                <span
+                    class="percent"
+                    id="tradePercent"
+                >
+                    67% of the way there
+                </span>
+
             </div>
 
         </div>
+
 
         <div
             class="quest-path"
@@ -840,7 +1143,7 @@ footer {
         </div>
 
         <div class="stat-note">
-            Actively being sketched and inked
+            Buried Secrets
         </div>
 
     </div>
@@ -857,7 +1160,7 @@ footer {
         </div>
 
         <div class="stat-note">
-            Finishing #6 completes Trade #1
+            Field Trip — finishing #6 completes Trade #1
         </div>
 
     </div>
@@ -885,12 +1188,10 @@ footer {
         <div class="snapshot-grid">
 
 
-            <!-- ISSUE 5 -->
-
             <div class="snapshot-box">
 
                 <h3>
-                    ⚔ Issue #5
+                    ⚔ Issue #5 — Buried Secrets
                 </h3>
 
 
@@ -960,8 +1261,6 @@ footer {
             </div>
 
 
-            <!-- COLOR -->
-
             <div class="snapshot-box">
 
                 <h3>
@@ -1012,15 +1311,14 @@ footer {
                     font-size:.78rem;
                     line-height:1.45;
                 ">
-                    At the sustainable pace of two color pages
-                    per week, the six-issue color run lands
-                    around August 2027.
+                    At 2–3 finished color pages per week,
+                    the six-issue color run is currently
+                    projected to finish between spring
+                    and late summer 2027.
                 </p>
 
             </div>
 
-
-            <!-- FULL SERIES -->
 
             <div class="snapshot-box">
 
@@ -1070,7 +1368,7 @@ footer {
 
 
 <!-- ========================================================
-     WEEKLY PACE
+     WEEKLY QUEST
      ======================================================== -->
 
 <section class="panel">
@@ -1117,7 +1415,7 @@ footer {
             <div class="pace-item">
 
                 <span class="pace-number">
-                    2
+                    2–3
                 </span>
 
                 <span class="pace-label">
@@ -1130,7 +1428,7 @@ footer {
             <div class="pace-item">
 
                 <span class="pace-number">
-                    6
+                    6–7
                 </span>
 
                 <span class="pace-label">
@@ -1141,29 +1439,19 @@ footer {
 
         </div>
 
-
-        <p style="
-            margin:16px 0 0;
-            font-size:.8rem;
-            font-weight:700;
-        ">
-            This is the baseline—not a race.
-            Anything above it is bonus progress.
-        </p>
-
     </div>
 
 </section>
 
 
 <!-- ========================================================
-     ISSUE CARDS
+     ISSUE PRODUCTION
      ======================================================== -->
 
 <section>
 
     <div style="
-        color:var(--white);
+        color:var(--ink);
         margin:34px 0 17px;
     ">
 
@@ -1226,7 +1514,7 @@ footer {
 
                 <p>
                     7 pages remain at the
-                    two-pages-per-week baseline.
+                    two-pages-per-week pace.
                 </p>
 
             </div>
@@ -1253,7 +1541,7 @@ footer {
             <div class="timeline-item">
 
                 <div class="timeline-date">
-                    Late Oct → Late Nov
+                    Late Oct → Late Nov 2026
                 </div>
 
                 <strong>
@@ -1279,8 +1567,8 @@ footer {
                 </strong>
 
                 <p>
-                    The final issue needed to
-                    complete the first trade.
+                    Field Trip is the final issue
+                    needed to complete Trade #1.
                 </p>
 
             </div>
@@ -1289,7 +1577,7 @@ footer {
             <div class="timeline-item">
 
                 <div class="timeline-date">
-                    ~August 2027
+                    ~Spring → Late Summer 2027
                 </div>
 
                 <strong>
@@ -1297,8 +1585,27 @@ footer {
                 </strong>
 
                 <p>
-                    Based on two finished color
-                    pages per week.
+                    Based on a pace of
+                    2–3 finished color pages per week.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item omnibus">
+
+                <div class="timeline-date">
+                    Estimated 2029
+                </div>
+
+                <strong>
+                    ⚔ The Omnibus
+                </strong>
+
+                <p>
+                    All 18 issues complete.
+                    The full Sharpest Sword saga
+                    collected from beginning to end.
                 </p>
 
             </div>
@@ -1322,7 +1629,7 @@ footer {
 /* ==========================================================
    SHARPEST SWORD PRODUCTION DATA
 
-   WHEN PROGRESS CHANGES, THIS IS THE MAIN SECTION TO EDIT.
+   UPDATE PROGRESS HERE.
    ========================================================== */
 
 const TOTAL_SERIES_ISSUES = 18;
@@ -1336,6 +1643,8 @@ const issues = [
 
     {
         issue: 1,
+        title: "Rat Bane",
+
         status: "released",
         scriptComplete: true,
 
@@ -1354,6 +1663,8 @@ const issues = [
 
     {
         issue: 2,
+        title: "The Talking Sword",
+
         status: "released",
         scriptComplete: true,
 
@@ -1372,6 +1683,8 @@ const issues = [
 
     {
         issue: 3,
+        title: "Welcome to Drukhovi",
+
         status: "released",
         scriptComplete: true,
 
@@ -1390,6 +1703,8 @@ const issues = [
 
     {
         issue: 4,
+        title: "Food Fight",
+
         status: "released",
         scriptComplete: true,
 
@@ -1408,6 +1723,8 @@ const issues = [
 
     {
         issue: 5,
+        title: "Buried Secrets",
+
         status: "production",
         scriptComplete: true,
 
@@ -1426,6 +1743,8 @@ const issues = [
 
     {
         issue: 6,
+        title: "Field Trip",
+
         status: "preproduction",
         scriptComplete: true,
 
@@ -1444,6 +1763,8 @@ const issues = [
 
     {
         issue: 7,
+        title: "What Happens in Stonefort",
+
         status: "preproduction",
         scriptComplete: true,
 
@@ -1462,6 +1783,8 @@ const issues = [
 
     {
         issue: 8,
+        title: "Untitled",
+
         status: "script",
         scriptComplete: false,
 
@@ -1482,8 +1805,6 @@ const issues = [
 
 /* ==========================================================
    DASHBOARD LOGIC
-
-   YOU NORMALLY DO NOT NEED TO EDIT BELOW THIS LINE.
    ========================================================== */
 
 
@@ -1578,17 +1899,6 @@ function buildIssueCards() {
             let rows = "";
 
 
-            /* ----------------------------------------------
-               RELEASED
-
-               Hide:
-               - Script stage
-               - Sketches
-               - Inks
-
-               Continue tracking color.
-               ---------------------------------------------- */
-
             if (
                 issue.status === "released"
             ) {
@@ -1602,17 +1912,6 @@ function buildIssueCards() {
 
             }
 
-
-            /* ----------------------------------------------
-               IN PRODUCTION
-
-               Script is complete and hidden.
-
-               Show:
-               - Sketches
-               - Inks
-               - Colors
-               ---------------------------------------------- */
 
             if (
                 issue.status === "production"
@@ -1643,13 +1942,6 @@ function buildIssueCards() {
             }
 
 
-            /* ----------------------------------------------
-               PRE-PRODUCTION
-
-               Script is complete.
-               Production has not officially started.
-               ---------------------------------------------- */
-
             if (
                 issue.status === "preproduction"
             ) {
@@ -1663,10 +1955,6 @@ function buildIssueCards() {
             }
 
 
-            /* ----------------------------------------------
-               SCRIPT IN PROGRESS
-               ---------------------------------------------- */
-
             if (
                 issue.status === "script"
             ) {
@@ -1679,10 +1967,6 @@ function buildIssueCards() {
 
             }
 
-
-            /* ----------------------------------------------
-               COVER
-               ---------------------------------------------- */
 
             const cover =
                 issue.cover
@@ -1702,10 +1986,6 @@ function buildIssueCards() {
                     </div>
                 `;
 
-
-            /* ----------------------------------------------
-               SCRIPT BUTTON
-               ---------------------------------------------- */
 
             const scriptButton =
                 issue.script
@@ -1745,6 +2025,10 @@ function buildIssueCards() {
                         <h3 class="issue-title">
                             Issue #${issue.issue}
                         </h3>
+
+                        <div class="issue-name">
+                            ${issue.title}
+                        </div>
 
                         <div class="issue-subtitle">
                             ${statusLabel(issue.status)}
@@ -1830,6 +2114,15 @@ document
     .getElementById("tradeReleased")
     .textContent =
         `${tradeReleased} / ${TRADE_ONE_ISSUES}`;
+
+
+document
+    .getElementById("tradePercent")
+    .textContent =
+        `${pct(
+            tradeReleased,
+            TRADE_ONE_ISSUES
+        )}% of the way there`;
 
 
 
@@ -2004,6 +2297,10 @@ function buildQuestPath() {
         }).join("");
 
 
+    const tradeComplete =
+        tradeReleased === TRADE_ONE_ISSUES;
+
+
     html += `
         <div class="quest-step goal">
 
@@ -2014,7 +2311,7 @@ function buildQuestPath() {
             <small>
                 Trade #1
                 <br>
-                Complete!
+                ${tradeComplete ? "Complete!" : "The Goal"}
             </small>
 
         </div>
