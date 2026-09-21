@@ -117,6 +117,23 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
 }
 @media(max-width:850px){.issue-grid{grid-template-columns:repeat(2,1fr)}.stats,.quest-grid{grid-template-columns:repeat(2,1fr)}.road{grid-template-columns:1fr}.milestones{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:550px){.issue-grid{grid-template-columns:1fr}.cover,.placeholder{height:360px}.stats{grid-template-columns:1fr 1fr}.wrap{width:92vw}header{padding:20px 16px}.milestones{grid-template-columns:repeat(2,1fr)}}
+
+.priority-strip{margin:18px 0 24px;padding:12px 16px;border:2px solid var(--red);background:rgba(244,241,232,.96);text-align:center;box-shadow:4px 4px 0 rgba(42,39,35,.16)}
+.priority-strip strong{font-family:"Bitter",Georgia,serif;font-size:1.02rem;letter-spacing:.045em;text-transform:uppercase}
+.priority-strip .projected{margin-top:4px;font-size:.84rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--red)}
+.issue.current-priority{border:3px double var(--red);box-shadow:0 0 0 3px rgba(143,45,38,.13),5px 5px 0 rgba(42,39,35,.15)}
+.trade-break{grid-column:1/-1;padding:22px;border:3px double var(--ink);background:rgba(239,235,224,.98);box-shadow:5px 5px 0 rgba(42,39,35,.14)}
+.trade-break .trade-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
+.trade-break h3{margin:0;font-family:"Bree Serif",Georgia,serif;font-size:1.55rem}
+.trade-break .trade-sub{margin-top:4px;font-size:.78rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.trade-break .trade-target{text-align:right;font-family:"Bitter",Georgia,serif;font-weight:800;text-transform:uppercase}
+.trade-break .trade-target small{display:block;margin-top:3px;font-family:"Libre Franklin",Arial,sans-serif;font-size:.68rem;letter-spacing:.04em}
+.trade-tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 22px}
+.trade-track .trade-row{display:flex;justify-content:space-between;gap:12px;font-family:"Bitter",Georgia,serif;font-weight:800;font-size:.82rem;text-transform:uppercase}
+.trade-track .bar{margin-top:6px}
+.trade-note{margin-top:16px;padding-top:12px;border-top:1px solid rgba(42,39,35,.35);font-size:.78rem;font-weight:700}
+@media(max-width:600px){.trade-break .trade-head{display:block}.trade-break .trade-target{text-align:left;margin-top:10px}.trade-tracks{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -124,10 +141,18 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
 <header>
   <h1>Sharpest Sword Production Tracker</h1>
   <p class="tagline">The sword is sharp. He is not.</p>
-  <div class="version">Production Dashboard • V4 • 18-Issue Plan</div>
+  <div class="version">PRODUCTION DASHBOARD • 18-ISSUE PLAN</div>
 </header>
 
 <div class="stats" id="stats"></div>
+
+<div class="priority-strip">
+  <strong>Current Priority: Issue #5 — Buried Secrets</strong>
+  <div class="projected">Projected Release: Mid-November 2026</div>
+</div>
+
+<h2 class="section-title">📚 Issues <span>#1–8</span></h2>
+<div class="issue-grid" id="issues"></div>
 
 <h2 class="section-title">⚔ Current <span>Progress</span></h2>
 <section class="quest">
@@ -135,24 +160,7 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
     <div class="quest-box"><strong>2</strong><span>Sketched / week — Issue #5</span></div>
     <div class="quest-box"><strong>2</strong><span>Inked / week — Issue #5</span></div>
     <div class="quest-box"><strong>2–3</strong><span>Colored / week — Issue #5</span></div>
-    <div class="quest-box"><strong>Mid-Nov.</strong><span>Issue #5 target</span></div>
   </div>
-</section>
-
-<h2 class="section-title">📚 Issues <span>#1–8</span></h2>
-<div class="issue-grid" id="issues"></div>
-
-<section class="trade">
-  <h2>📕 Trade #1 — Issues #1–6</h2>
-  <p><b>The Goal:</b> Issue #6 and Trade #1 release together in <b>June 2027</b>. Trade #1 requires all 144 pages of Issues #1–6 to be colored.</p>
-  <div class="trade-meter"><div></div></div>
-  <small><b>48 / 144 colored pages</b> • 96 remaining</small>
-  <div class="milestones">
-    <div class="milestone done">#1<br>Colored</div>
-    <div class="milestone done">#2<br>Colored</div>
-    <div class="milestone">#3</div><div class="milestone">#4</div><div class="milestone">#5</div><div class="milestone">#6</div>
-  </div>
-  <p class="note">Issue #6 is the <b>Coloring Alignment</b> phase: art slows to 1.5 sketches and 1.5 inks per week while coloring accelerates to 3–4 pages per week. Issue #7 begins after the joint Issue #6 + Trade #1 release.</p>
 </section>
 
 <section class="timeline-box">
@@ -172,19 +180,39 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
   <div class="road-card"><b>~May 2031</b>Projected Issue #18 / end of the 18-issue production plan.</div>
 </div>
 
-<footer>SHARPEST SWORD • PRODUCTION TRACKER • V4.5 • 18-ISSUE PLAN</footer>
+<footer>SHARPEST SWORD • PRODUCTION TRACKER • 18-ISSUE PLAN</footer>
 </div>
 
 <script>
+
+function tradeProgress(label,current,total){
+ const pct=total?Math.min(100,(current/total)*100):0;
+ return `<div class="trade-track"><div class="trade-row"><span>${label}</span><span>${current} / ${total}</span></div><div class="bar"><span style="width:${pct}%"></span></div></div>`;
+}
+function tradeOneCard(){
+ const t=issues.filter(i=>i.issue<=6);
+ const scripts=t.filter(i=>i.scriptComplete!==false).length;
+ const finished=t.reduce((s,i)=>s+i.inks,0);
+ const colored=t.reduce((s,i)=>s+i.colors,0);
+ const released=t.filter(i=>i.status==="released").length;
+ const complete=scripts===6&&finished===144&&colored===144&&released===6;
+ return `<article class="trade-break">
+ <div class="trade-head"><div><h3>📕 TRADE #1 — ISSUES #1–6</h3><div class="trade-sub">${complete?"Complete":"In Production"}</div></div>
+ <div class="trade-target">Projected: June 2027<small>Issue #6 + Trade #1 release together</small></div></div>
+ <div class="trade-tracks">${tradeProgress("Scripts",scripts,6)}${tradeProgress("Finished Pages",finished,144)}${tradeProgress("Colored Pages",colored,144)}${tradeProgress("Issues Released",released,6)}</div>
+ <div class="trade-note"><strong>Coloring Alignment:</strong> Issue #6 brings finished art and coloring together so all 144 pages are ready for Trade #1. Issue #7 begins after the joint release.</div>
+ </article>`;
+}
+
 const issues = [
- {issue:1,title:"Rat Bane",status:"released",pages:24,sketches:24,inks:24,colors:24,cover:"issue-1.jpg",script:"https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"},
- {issue:2,title:"The Talking Sword",status:"released",pages:24,sketches:24,inks:24,colors:24,cover:"issue-2.jpg",script:"https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:3,title:"Welcome to Drukhovi",status:"released",pages:24,sketches:24,inks:24,colors:0,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
- {issue:4,title:"Food Fight",status:"released",pages:24,sketches:24,inks:24,colors:0,cover:"issue-4.jpg",script:"https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:5,title:"Buried Secrets",status:"production",pages:24,sketches:17,inks:14,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
- {issue:6,title:"Field Trip",status:"preproduction",pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"},
- {issue:7,title:"What Happens in Stonefort",status:"preproduction",pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"},
- {issue:8,title:"Untitled",status:"script",pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1nXkTz5Nk-3A5tLnsFV5McuC3ZHR3ko9H4UUUJUNQL8s/edit?tab=t.0"}
+ {issue:1,title:"Rat Bane",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:24,cover:"issue-1.jpg",script:"https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"},
+ {issue:2,title:"The Talking Sword",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:24,cover:"issue-2.jpg",script:"https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
+ {issue:3,title:"Welcome to Drukhovi",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
+ {issue:4,title:"Food Fight",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"issue-4.jpg",script:"https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
+ {issue:5,title:"Buried Secrets",status:"production",scriptComplete:true,pages:24,sketches:17,inks:14,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
+ {issue:6,title:"Field Trip",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"},
+ {issue:7,title:"What Happens in Stonefort",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"},
+ {issue:8,title:"Untitled",status:"script",scriptComplete:false,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1nXkTz5Nk-3A5tLnsFV5McuC3ZHR3ko9H4UUUJUNQL8s/edit?tab=t.0"}
 ];
 
 const statusNames={released:"Released",production:"In Production",preproduction:"Pre-Production",script:"Script in Progress"};
@@ -200,7 +228,7 @@ function progress(label,value,total){
  return `<div class="progress-row"><div class="progress-label"><span>${label}</span><span>${value}/${total}</span></div><div class="bar"><div class="fill" style="width:${pct}%"></div></div></div>`;
 }
 document.getElementById("issues").innerHTML=issues.map(i=>`
- <article class="issue">
+ <article class="issue ${i.status==="production" ? "current-priority" : ""}">
    ${i.cover?`<img class="cover" src="${i.cover}" alt="Issue ${i.issue} cover">`:`<div class="placeholder">ISSUE #${i.issue} COVER</div>`}
    <div class="issue-no">Issue #${i.issue}</div>
    <h3>${i.title}</h3>
