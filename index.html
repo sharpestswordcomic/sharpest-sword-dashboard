@@ -141,6 +141,23 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
   border-color:var(--ink);
 }
 
+
+/* Cleaner roadmap timeline */
+.timeline-body{padding:18px}
+.timeline-rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 18px;padding:12px;border:1px solid rgba(42,39,35,.35);background:rgba(244,241,232,.82)}
+.timeline-rule{font-size:.72rem;line-height:1.35}.timeline-rule b{display:block;font-family:"Bitter",Georgia,serif;text-transform:uppercase;margin-bottom:2px}
+.trade-chapter{margin:18px 0 8px;padding:7px 10px;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);font-family:"Bitter",Georgia,serif;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.timeline-row{display:grid;grid-template-columns:minmax(180px,1.15fr) minmax(280px,2fr) minmax(145px,.8fr);gap:14px;align-items:center;padding:11px 10px;border-bottom:1px solid rgba(42,39,35,.22)}
+.timeline-row.current{border:2px solid var(--red);background:rgba(244,241,232,.88);box-shadow:3px 3px 0 rgba(42,39,35,.12)}
+.timeline-id b{display:block;font-family:"Bitter",Georgia,serif;font-size:.9rem;text-transform:uppercase}.timeline-id span{display:block;margin-top:2px;font-size:.72rem;font-weight:700}
+.phase-chain{display:flex;align-items:center;flex-wrap:wrap;gap:5px}.phase{padding:5px 7px;border:1px solid rgba(42,39,35,.45);background:rgba(255,255,255,.28);font-size:.64rem;font-weight:900;letter-spacing:.035em;text-transform:uppercase}
+.phase.active{border-color:var(--red);color:var(--red)}.phase.trade-phase{background:var(--ink);color:var(--paper);border-color:var(--ink)}.phase.buffer-phase{border-style:dashed;font-weight:900}.phase-arrow{font-weight:900;opacity:.5}
+.release-block{justify-self:stretch;padding:9px;background:var(--red);color:#f5f0e6;text-align:center;border:2px solid var(--ink);box-shadow:2px 2px 0 rgba(42,39,35,.18);font-family:"Bitter",Georgia,serif;font-weight:900;text-transform:uppercase}
+.release-block small{display:block;font-family:"Libre Franklin",Arial,sans-serif;font-size:.57rem;letter-spacing:.09em;margin-bottom:2px}.release-block.released{background:var(--ink)}
+.trade-release{margin:8px 0 20px;padding:10px;text-align:center;border:3px double var(--red);background:rgba(244,241,232,.95);font-family:"Bitter",Georgia,serif;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
+.omnibus-release{margin-top:24px;background:var(--ink);color:var(--paper);border-color:var(--red);font-size:1.05rem}
+@media(max-width:760px){.timeline-rules{grid-template-columns:1fr 1fr}.timeline-row{grid-template-columns:1fr;gap:8px}.release-block{text-align:left}}@media(max-width:480px){.timeline-rules{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -175,9 +192,10 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
 
 <h2 class="section-title">🗺 The <span>Road Ahead</span></h2>
 <div class="road">
-  <div class="road-card"><b>June 2027</b>Issue #6 + Trade #1 release together after Coloring Alignment.</div>
-  <div class="road-card"><b>~May 2029</b>Projected Issue #12 + Trade #2 joint release.</div>
-  <div class="road-card"><b>~May 2031</b>Projected Issue #18 / end of the 18-issue production plan.</div>
+  <div class="road-card"><b>June 2027</b>Issue #6 + Trade #1 release together after Trade Completion.</div>
+  <div class="road-card"><b>June 2029</b>Projected Issue #12 + Trade #2 joint release.</div>
+  <div class="road-card"><b>June 2031</b>Projected Issue #18 + Trade #3 joint release.</div>
+  <div class="road-card"><b>December 2031</b>Projected complete-series Omnibus release.</div>
 </div>
 
 <footer>SHARPEST SWORD • PRODUCTION TRACKER • 18-ISSUE PLAN</footer>
@@ -200,7 +218,7 @@ function tradeOneCard(){
  <div class="trade-head"><div><h3>📕 TRADE #1 — ISSUES #1–6</h3><div class="trade-sub">${complete?"Complete":"In Production"}</div></div>
  <div class="trade-target">Projected: June 2027<small>Issue #6 + Trade #1 release together</small></div></div>
  <div class="trade-tracks">${tradeProgress("Scripts",scripts,6)}${tradeProgress("Finished Pages",finished,144)}${tradeProgress("Colored Pages",colored,144)}${tradeProgress("Issues Released",released,6)}</div>
- <div class="trade-note"><strong>Coloring Alignment:</strong> Issue #6 brings finished art and coloring together so all 144 pages are ready for Trade #1. Issue #7 begins after the joint release.</div>
+ <div class="trade-note"><strong>Trade Completion:</strong> Issue #6 brings finished art and coloring together so all 144 pages are ready for Trade #1. Issue #7 begins after the joint release.</div>
  </article>`;
 }
 
@@ -220,7 +238,7 @@ const statusNames={released:"Released",production:"In Production",preproduction:
 const totalColor=issues.slice(0,6).reduce((a,x)=>a+x.colors,0);
 document.getElementById("stats").innerHTML=`
  <div class="stat"><b>4 / 18</b><small>Issues Released</small></div>
- <div class="stat"><b>14 / 24</b><small>Issue #5 Inked</small></div>
+ <div class="stat"><b>15 / 24</b><small>Issue #5 Inked</small></div>
  <div class="stat"><b>17 / 24</b><small>Issue #5 Sketched</small></div>
  <div class="stat"><b>${totalColor} / 144</b><small>Trade #1 Colored</small></div>`;
 
@@ -248,46 +266,54 @@ document.getElementById("issues").innerHTML=issues.map(i=>`
  The long-range dates are planning projections. They intentionally use month-level
  precision because family/school schedules and production speed will vary.
 */
-const timeline = [
- ["#1","Rat Bane","Released",""],
- ["#2","The Talking Sword","Released",""],
- ["#3","Welcome to Drukhovi","Released",""],
- ["#4","Food Fight","Released",""],
- ["#5","Buried Secrets","Art: now → late Oct. 2026","Post-Production: 3 weeks • PROJECTED RELEASE: Mid-Nov. 2026"],
- ["#6","Field Trip","Pre-Production: late Nov. 2026 • COLORING ALIGNMENT: Dec. 2026 → Mar. 2027","Post-Production + Trade Production: spring 2027 • PROJECTED JOINT RELEASE WITH TRADE #1: June 2027"],
- ["#7","What Happens in Stonefort","Pre-Production: late Jun. 2027 • Art: Jul. → Sep. 2027","Post-Production: ~1 month • PROJECTED RELEASE: Oct. 2027"],
- ["#8","ISSUE 8","Pre-Production: Oct. 2027 • Art: Oct. → Dec. 2027","Post-Production: ~1 month • PROJECTED RELEASE: Jan. 2028"],
- ["#9","ISSUE 9","Pre-Production: Jan./Feb. 2028 • Art: Feb. → Apr. 2028","Post-Production: ~1 month • PROJECTED RELEASE: May 2028"],
- ["#10","ISSUE 10","Pre-Production: May 2028 • Art: May → Jul./Aug. 2028","Post-Production: ~1 month • PROJECTED RELEASE: Sep. 2028"],
- ["#11","ISSUE 11","Pre-Production: Sep. 2028 • Art: Sep. → Nov. 2028","Post-Production: ~1 month • PROJECTED RELEASE: Dec. 2028"],
- ["#12","ISSUE 12","Pre-Production: Dec. 2028/Jan. 2029 • Art: Jan. → Mar. 2029","Post-Production + Trade Production • PROJECTED JOINT RELEASE WITH TRADE #2: ~May 2029"],
- ["#13","ISSUE 13","Pre-Production: May/Jun. 2029 • Art: Jun. → Aug. 2029","Post-Production: ~1 month • PROJECTED RELEASE: Sep./Oct. 2029"],
- ["#14","ISSUE 14","Pre-Production: Oct. 2029 • Art: Oct. → Dec. 2029","Post-Production: ~1 month • PROJECTED RELEASE: Jan. 2030"],
- ["#15","ISSUE 15","Pre-Production: Jan./Feb. 2030 • Art: Feb. → Apr. 2030","Post-Production: ~1 month • PROJECTED RELEASE: May 2030"],
- ["#16","ISSUE 16","Pre-Production: May 2030 • Art: May → Jul./Aug. 2030","Post-Production: ~1 month • PROJECTED RELEASE: Sep. 2030"],
- ["#17","ISSUE 17","Pre-Production: Sep. 2030 • Art: Sep. → Nov. 2030","Post-Production: ~1 month • PROJECTED RELEASE: Dec. 2030"],
- ["#18","ISSUE 18","Pre-Production: Dec. 2030/Jan. 2031 • Art: Jan. → Mar. 2031","Post-Production + Trade Production • PROJECTED RELEASE: ~May 2031"]
+const timelineData=[
+ {issue:1,title:"Rat Bane",release:"Released",released:true},
+ {issue:2,title:"The Talking Sword",release:"Released",released:true},
+ {issue:3,title:"Welcome to Drukhovi",release:"Released",released:true},
+ {issue:4,title:"Food Fight",release:"Released",released:true},
+ {issue:5,title:"Buried Secrets",phases:["Art","Post-Production"],active:"Art",release:"Mid-Nov 2026"},
+ {issue:6,title:"Field Trip",phases:["Pre-Production","Art","Post-Production","Trade Completion"],release:"June 2027",tradeEnd:1},
+ {issue:7,title:"What Happens in Stonefort",phases:["Pre-Production","Art","Post-Production"],release:"Oct 2027"},
+ {issue:8,title:null,phases:["Pre-Production","Art","Post-Production","Double-Issue Buffer"],release:"Feb 2028"},
+ {issue:9,title:null,phases:["Pre-Production","Art","Post-Production"],release:"Jun 2028"},
+ {issue:10,title:null,phases:["Pre-Production","Art","Post-Production","Double-Issue Buffer"],release:"Oct 2028"},
+ {issue:11,title:null,phases:["Pre-Production","Art","Post-Production"],release:"Jan 2029"},
+ {issue:12,title:null,phases:["Pre-Production","Art","Post-Production","Trade Completion"],release:"June 2029",tradeEnd:2},
+ {issue:13,title:null,phases:["Pre-Production","Art","Post-Production"],release:"Sep/Oct 2029"},
+ {issue:14,title:null,phases:["Pre-Production","Art","Post-Production","Double-Issue Buffer"],release:"Feb 2030"},
+ {issue:15,title:null,phases:["Pre-Production","Art","Post-Production"],release:"Jun 2030"},
+ {issue:16,title:null,phases:["Pre-Production","Art","Post-Production","Double-Issue Buffer"],release:"Oct 2030"},
+ {issue:17,title:null,phases:["Pre-Production","Art","Post-Production"],release:"Jan 2031"},
+ {issue:18,title:null,phases:["Pre-Production","Art","Post-Production","Trade Completion"],release:"June 2031",tradeEnd:3}
 ];
-const productionModes = `
- <div class="production-modes">
-   <h3>Production Modes</h3>
-   <p><b>Issue #5:</b> 2 Sketched / 2 Inked / 2–3 Colored per week.</p>
-   <p><b>Issue #6 — Coloring Alignment:</b> 1.5 Sketched / 1.5 Inked / 3–4 Colored per week.</p>
-   <p><b>Issue #7 onward — School Year:</b> 3 Sketched / 3 Inked / 2–3 Colored per week.</p>
-   <p><b>Summer (June–July):</b> 2 Sketched / 2 Inked / 2 Colored per week.</p>
-   <p><b>Pre-Production:</b> 2 weeks before each new issue.</p>
- </div>`;
-document.getElementById("timeline").innerHTML=productionModes + timeline.map((t,idx)=>{
- const trade=[5,11,17].includes(idx);
- const alignment=idx===5;
- return `<div class="t-item">
-   <div class="t-dot ${trade?"trade-dot":""}">${t[0]}</div>
-   <div class="t-card ${alignment?"alignment":""}">
-    <h4>${t[1]}${alignment?" — 🎨 Coloring Alignment":""}</h4>
-    <p>${t[2]}</p><p class="projected">${t[3]}</p>
-   </div>
- </div>`;
-}).join("");
+function phaseChain(item){
+ if(item.released)return `<div class="phase-chain"><span class="phase">Complete</span></div>`;
+ return `<div class="phase-chain">${item.phases.map((p,n)=>`${n?'<span class="phase-arrow">→</span>':''}<span class="phase ${p===item.active?'active':''} ${p==="Trade Completion"?'trade-phase':p==="Double-Issue Buffer"?'buffer-phase':''}">${p}</span>`).join("")}</div>`;
+}
+function chapterFor(issue){
+ if(issue===1)return `<div class="trade-chapter">Trade #1 · Issues #1–6</div>`;
+ if(issue===7)return `<div class="trade-chapter">Trade #2 · Issues #7–12</div>`;
+ if(issue===13)return `<div class="trade-chapter">Trade #3 · Issues #13–18</div>`;
+ return "";
+}
+document.getElementById("timeline").innerHTML=`
+ <div class="timeline-rules">
+  <div class="timeline-rule"><b>Pre-Production</b>2 weeks before each new issue</div>
+  <div class="timeline-rule"><b>School-Year Art</b>3 sketched · 3 inked · 2–3 colored / week</div>
+  <div class="timeline-rule"><b>Summer · Jun–Jul</b>2 sketched · 2 inked · 2 colored / week</div>
+  <div class="timeline-rule"><b>Trade Completion</b>Final coloring + collected-edition production</div><div class="timeline-rule"><b>Double-Issue Buffer</b>Extra post-production time after Issues #8, #10, #14 and #16</div>
+ </div>
+ ${timelineData.map(item=>`
+  ${chapterFor(item.issue)}
+  <div class="timeline-row ${item.issue===5?'current':''}">
+   <div class="timeline-id"><b>Issue #${item.issue}${item.title?` · ${item.title}`:""}</b><span>${item.issue===5?"Current production priority":item.released?"Released":item.tradeEnd?"Trade endpoint":"Projected production"}</span></div>
+   ${phaseChain(item)}
+   <div class="release-block ${item.released?'released':''}"><small>${item.released?"Status":"Projected Release"}</small>${item.release}</div>
+  </div>
+  ${item.tradeEnd?`<div class="trade-release">Trade #${item.tradeEnd} Release · ${item.release}${item.tradeEnd===1?" · Issue #6 + Trade #1 together":item.tradeEnd===2?" · Issue #12 + Trade #2 together":" · Issue #18 + Trade #3"}</div>`:""}
+ `).join("")}
+ <div class="trade-release omnibus-release">📚 OMNIBUS RELEASE · DECEMBER 2031</div>
+`;
 
 const btn=document.getElementById("timelineToggle"), body=document.getElementById("timeline"), arrow=document.getElementById("timelineArrow");
 btn.addEventListener("click",()=>{
