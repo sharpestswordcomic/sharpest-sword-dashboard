@@ -214,8 +214,8 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
     <div class="priority-phase active">
       <span class="phase-name">Production</span>
       <span class="phase-state">Current Phase</span>
-      <div class="mini-bar"><div class="mini-fill" style="width:62.5%"></div></div>
-      <span class="phase-count">15 / 24 pages · 63%</span>
+      <div class="mini-bar"><div class="mini-fill" style="width:91.7%"></div></div>
+      <span class="phase-count">22 / 24 pages · 92%</span>
     </div>
     <div class="priority-phase">
       <span class="phase-name">Post-Production</span>
@@ -322,9 +322,9 @@ function tradeOneCard(){
 const issues = [
  {issue:1,title:"Rat Bane",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:24,cover:"issue-1.jpg",script:"https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"},
  {issue:2,title:"The Talking Sword",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:24,cover:"issue-2.jpg",script:"https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:3,title:"Welcome to Drukhovi",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:2,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
+ {issue:3,title:"Welcome to Drukhovi",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:9,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
  {issue:4,title:"Food Fight",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"issue-4.jpg",script:"https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:5,title:"Buried Secrets",status:"production",scriptComplete:true,pages:24,sketches:17,inks:15,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
+ {issue:5,title:"Buried Secrets",status:"production",scriptComplete:true,pages:24,sketches:24,inks:22,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
  {issue:6,title:"Field Trip",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"},
  {issue:7,title:"What Happens in Stonefort",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"},
  {issue:8,title:"Untitled",status:"script",scriptComplete:false,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1nXkTz5Nk-3A5tLnsFV5McuC3ZHR3ko9H4UUUJUNQL8s/edit?tab=t.0"},
@@ -335,8 +335,8 @@ const statusNames={released:"Released",production:"In Production",preproduction:
 const totalColor=issues.slice(0,6).reduce((a,x)=>a+x.colors,0);
 document.getElementById("stats").innerHTML=`
  <div class="stat"><b>4 / 18</b><small>Issues Released</small></div>
- <div class="stat"><b>15 / 24</b><small>Issue #5 Inked</small></div>
- <div class="stat"><b>17 / 24</b><small>Issue #5 Sketched</small></div>
+ <div class="stat"><b>22 / 24</b><small>Issue #5 Inked</small></div>
+ <div class="stat"><b>24 / 24</b><small>Issue #5 Sketched</small></div>
  <div class="stat"><b>${totalColor} / 144</b><small>Trade #1 Colored</small></div>`;
 
 function progress(label,value,total){
