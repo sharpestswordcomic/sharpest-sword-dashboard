@@ -3,138 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sharpest Sword Production Tracker — </title>
+<meta name="theme-color" content="#d8d8d3">
+<title>Sharpest Sword Production Tracker — V4.7</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Bree+Serif&family=Libre+Franklin:wght@500;700;900&display=swap');
-
 :root{
-  --paper:#d8d8d3;
-  --panel:#eeeeea;
-  --panel2:#e4e4df;
-  --ink:#20201f;
-  --muted:#686864;
-  --red:#9f302d;
-  --green:#4f725a;
-  --gold:#8a7851;
-  --line:#343432;
-  --shadow:rgba(20,20,18,.18);
+  --paper:#d8d8d3;--panel:#eeeeea;--panel2:#e4e4df;--ink:#20201f;
+  --muted:#686864;--red:#9f302d;--green:#4f725a;--gold:#8a7851;
+  --line:#343432;--shadow:rgba(20,20,18,.18)
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  margin:0;
-  color:var(--ink);
-  font-family:"Libre Franklin",Arial,sans-serif;
-  background: url("background.jpg") center top / cover fixed;
-}
+body{margin:0;color:var(--ink);font-family:"Libre Franklin",Arial,sans-serif;background:var(--paper) url("background.jpg") center top / cover fixed}
 .wrap{width:min(1180px,94vw);margin:auto;padding:30px 0 45px}
-header{
-  border:3px solid var(--line); background:var(--panel); padding:24px 25px 20px;
-  box-shadow:7px 7px 0 var(--line); position:relative; overflow:hidden;
-}
-header:before{
-  content:"";position:absolute;right:20px;top:12px;font:800 64px/1 "Bitter";
-  color:rgba(32,32,31,.06);transform:rotate(-4deg)
-}
-h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif";margin:0;letter-spacing:-1px}
-.tagline{font:700 15px "Bitter";text-transform:uppercase;letter-spacing:2px;margin:11px 0 0;color:var(--red)}
+header{border:3px solid var(--line);background:var(--panel);padding:24px 25px 20px;box-shadow:7px 7px 0 var(--line);position:relative;overflow:hidden}
+header:before{content:"V4.7";position:absolute;right:20px;top:12px;font:800 64px/1 "Bitter",Georgia,serif;color:rgba(32,32,31,.06);transform:rotate(-4deg);pointer-events:none}
+h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif",Georgia,serif;margin:0;letter-spacing:-1px;position:relative}
+.tagline{font:700 15px "Bitter",Georgia,serif;text-transform:uppercase;letter-spacing:2px;margin:11px 0 0;color:var(--red)}
 .version{margin-top:9px;color:var(--muted);font-size:12px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
-.section-title{font:800 22px "Bitter";text-transform:uppercase;letter-spacing:.7px;margin:34px 0 13px}
+.section-title{font:800 22px "Bitter",Georgia,serif;text-transform:uppercase;letter-spacing:.7px;margin:34px 0 13px}
 .section-title span{color:var(--red)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:23px}
 .stat{background:var(--panel);border:2px solid var(--line);padding:16px;box-shadow:3px 3px 0 var(--line)}
-.stat b{font:800 29px "Bitter";display:block}
-.stat small{font-weight:900;text-transform:uppercase;color:var(--muted);letter-spacing:.7px}
-.quest{
-  background:var(--panel);border:3px solid var(--line);box-shadow:5px 5px 0 var(--line);padding:19px;
-}
-.quest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.quest-box{border:2px solid var(--line);background:var(--panel2);padding:14px;text-align:center}
-.quest-box strong{display:block;font:800 25px "Bitter";color:var(--red)}
-.quest-box span{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.8px}
-.note{font-size:12px;color:var(--muted);margin:13px 2px 0;line-height:1.5}
+.stat b{font:800 29px "Bitter",Georgia,serif;display:block}
+.stat small{font-weight:900;text-transform:uppercase;color:var(--muted);letter-spacing:.7px;font-size:11px}
+.priority-strip{margin:18px 0 24px;padding:12px 16px;border:2px solid var(--red);background:rgba(244,241,232,.96);text-align:center;box-shadow:4px 4px 0 rgba(42,39,35,.16)}
+.priority-strip strong{font-family:"Bitter",Georgia,serif;font-size:1.02rem;letter-spacing:.045em;text-transform:uppercase}
+.priority-strip .projected{margin-top:6px;font-size:.84rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
+.priority-strip .detail{margin-top:7px;color:var(--muted);font-size:.73rem;line-height:1.45}
+.projected{font-weight:900;color:var(--red)}
 .issue-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.issue{
-  background:var(--panel);border:2px solid var(--line);box-shadow:4px 4px 0 var(--line);
-  padding:14px;position:relative;display:flex;flex-direction:column;
-}
+.issue{background:var(--panel);border:2px solid var(--line);box-shadow:4px 4px 0 var(--line);padding:14px;position:relative;display:flex;flex-direction:column}
+.issue.current-priority{border:3px double var(--red);box-shadow:0 0 0 3px rgba(143,45,38,.13),5px 5px 0 rgba(42,39,35,.15)}
 .cover{width:100%;height:290px;object-fit:contain;background:#c7c7c2;border:1px solid #777}
-.placeholder{height:290px;display:grid;place-items:center;background:var(--panel2);border:1px dashed #777;color:#777;font:700 14px "Bitter"}
-.issue h3{font:700 21px "Bree Serif";margin:12px 0 2px}
-.issue-no{font:800 12px "Bitter";color:var(--red);text-transform:uppercase;letter-spacing:1px}
-.stamp{
-  display:inline-block;margin:8px 0;padding:5px 8px;border:2px solid currentColor;
-  font:800 10px "Bitter";letter-spacing:1px;text-transform:uppercase;transform:rotate(-1deg)
-}
-.released{color:var(--green)} .colored{color:#50677a} .production{color:var(--red)} .preproduction{color:var(--gold)} .script{color:#69645b}
+.cover-fallback{width:100%;height:290px;border:1px dashed #888;background:linear-gradient(135deg,#dbd9d1,#c1bfb8);display:grid;place-items:center;text-align:center;padding:12px;font:800 13px "Bitter",Georgia,serif;color:#666;letter-spacing:.08em}
+.issue h3{font:700 21px "Bree Serif",Georgia,serif;margin:12px 0 2px}
+.issue-no{font:800 12px "Bitter",Georgia,serif;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-top:10px}
+.stamp{display:inline-block;align-self:flex-start;margin:8px 0;padding:5px 8px;border:2px solid currentColor;font:800 10px "Bitter",Georgia,serif;letter-spacing:1px;text-transform:uppercase;transform:rotate(-1deg)}
+.stamp.released,.stamp.inked{color:var(--green)}
+.stamp.colored{color:#50677a}.stamp.production{color:var(--red)}
+.stamp.preproduction{color:var(--gold)}.stamp.script{color:#69645b}
 .progress-row{margin:10px 0 0}
-.progress-label{display:flex;justify-content:space-between;font-size:11px;font-weight:900;text-transform:uppercase}
+.progress-label{display:flex;justify-content:space-between;gap:6px;font-size:11px;font-weight:900;text-transform:uppercase}
 .bar{height:9px;background:#bdbdb8;border:1px solid #777;margin-top:4px}
 .fill{height:100%;background:var(--ink)}
-.script-link{display:block;align-self:flex-start;margin-top:auto;padding-top:13px;color:var(--red);font:800 11px "Bitter";text-transform:uppercase;text-decoration:none;border-bottom:1px solid}
-.trade{
-  margin-top:30px;background:var(--panel);border:3px solid var(--line);box-shadow:6px 6px 0 var(--line);padding:22px;
-}
-.trade h2{font:700 30px "Bree Serif";margin:0 0 7px}
-.trade-meter{height:18px;border:2px solid var(--line);background:#bbb;margin:14px 0 7px}
-.trade-meter div{height:100%;background:var(--red);width:33.333%}
-.milestones{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:17px}
-.milestone{text-align:center;border:1px solid #777;padding:9px 4px;background:var(--panel2);font:800 10px "Bitter"}
-.milestone.done{background:#c9d2c9}
-.timeline-box{
-  margin-top:32px;background:var(--panel);border:3px solid var(--line);box-shadow:6px 6px 0 var(--line);overflow:hidden
-}
-.timeline-button{
-  width:100%;border:0;background:transparent;color:var(--ink);padding:20px;text-align:left;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;font:800 19px "Bitter"
-}
-.timeline-sub{display:block;font:500 11px "Libre Franklin";color:var(--muted);margin-top:4px;text-transform:none}
-.timeline-body{display:none;border-top:2px solid var(--line);padding:18px}
-.timeline-body.open{display:block}
-.production-modes{border:2px solid var(--line);background:var(--panel2);padding:14px 16px;margin-bottom:20px}
-.production-modes h3{font:800 15px "Bitter";text-transform:uppercase;margin:0 0 9px;color:var(--red)}
-.production-modes p{font-size:12px;line-height:1.55;margin:4px 0}
-.t-item{display:grid;grid-template-columns:74px 1fr;gap:13px;position:relative;padding-bottom:22px}
-.t-item:not(:last-child):before{content:"";position:absolute;left:35px;top:34px;bottom:0;border-left:3px solid #888}
-.t-dot{width:70px;height:34px;display:grid;place-items:center;background:var(--ink);color:white;font:800 12px "Bitter";z-index:1}
-.t-dot.trade-dot{background:var(--red)}
-.t-card{border:1px solid #888;background:var(--panel2);padding:11px 13px}
-.t-card h4{font:700 17px "Bree Serif";margin:0 0 5px}
-.t-card p{margin:3px 0;font-size:12px;line-height:1.5}
-.projected{font-weight:900;color:var(--red)}
-.alignment{border-left:5px solid var(--red)}
-.road{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
-.road-card{background:var(--panel);border:2px solid var(--line);padding:16px}
-.road-card b{font:800 20px "Bitter";display:block;margin-bottom:5px}
-footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2px;color:#666}
-@media(max-width:600px){
-  body{
-    background-size:100% auto;
-    background-repeat:repeat-y;
-    background-attachment:scroll;
-    background-position:center top;
-  }
-}
-@media(max-width:850px){.issue-grid{grid-template-columns:repeat(2,1fr)}.stats,.quest-grid{grid-template-columns:repeat(2,1fr)}.road{grid-template-columns:1fr}.milestones{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:550px){.issue-grid{grid-template-columns:1fr}.cover,.placeholder{height:360px}.stats{grid-template-columns:1fr 1fr}.wrap{width:92vw}header{padding:20px 16px}.milestones{grid-template-columns:repeat(2,1fr)}}
-
-.priority-strip{margin:18px 0 24px;padding:16px;border:2px solid var(--red);background:rgba(244,241,232,.96);box-shadow:4px 4px 0 rgba(42,39,35,.16)}
-.priority-heading{text-align:center}
-.priority-strip strong{font-family:"Bitter",Georgia,serif;font-size:1.02rem;letter-spacing:.045em;text-transform:uppercase}
-.priority-strip .projected{margin-top:4px;font-size:.84rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--red)}
-.priority-phases{display:grid;grid-template-columns:1fr 2.2fr 1fr .8fr;gap:6px;margin-top:15px;align-items:stretch}
-.priority-phase{position:relative;min-width:0;padding:10px 8px 9px;border:1px solid rgba(42,39,35,.42);background:rgba(255,255,255,.28);text-align:left}
-.priority-phase.done{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.priority-phase.active{border:2px solid var(--red);background:rgba(143,45,38,.07)}
-.priority-phase .phase-name{display:block;font-family:"Bitter",Georgia,serif;font-size:.69rem;font-weight:900;letter-spacing:.045em;text-transform:uppercase}
-.priority-phase .phase-state{display:block;margin-top:3px;font-size:.62rem;font-weight:800;text-transform:uppercase;opacity:.78}
-.priority-phase.active .phase-state{color:var(--red);opacity:1}
-.priority-phase .mini-bar{height:7px;margin-top:8px;border:1px solid currentColor;background:rgba(255,255,255,.22);overflow:hidden}
-.priority-phase .mini-fill{height:100%;background:currentColor}
-.priority-phase.active .mini-fill{background:var(--red)}
-.priority-phase .phase-count{display:block;margin-top:4px;font-family:"Bitter",Georgia,serif;font-size:.66rem;font-weight:900;text-align:right}
-@media(max-width:600px){.priority-phases{grid-template-columns:1fr 1fr}.priority-phase{min-height:78px}}
-.issue.current-priority{border:3px double var(--red);box-shadow:0 0 0 3px rgba(143,45,38,.13),5px 5px 0 rgba(42,39,35,.15)}
+.script-link{display:block;align-self:flex-start;margin-top:auto;padding-top:13px;color:var(--red);font:800 11px "Bitter",Georgia,serif;text-transform:uppercase;text-decoration:none;border-bottom:1px solid}
+.script-link:hover{color:#5b1f1b}
 .trade-break{grid-column:1/-1;padding:22px;border:3px double var(--ink);background:rgba(239,235,224,.98);box-shadow:5px 5px 0 rgba(42,39,35,.14)}
 .trade-break .trade-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
 .trade-break h3{margin:0;font-family:"Bree Serif",Georgia,serif;font-size:1.55rem}
@@ -144,42 +58,46 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
 .trade-tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 22px}
 .trade-track .trade-row{display:flex;justify-content:space-between;gap:12px;font-family:"Bitter",Georgia,serif;font-weight:800;font-size:.82rem;text-transform:uppercase}
 .trade-track .bar{margin-top:6px}
-.trade-note{margin-top:16px;padding-top:12px;border-top:1px solid rgba(42,39,35,.35);font-size:.78rem;font-weight:700}
-@media(max-width:600px){.trade-break .trade-head{display:block}.trade-break .trade-target{text-align:left;margin-top:10px}.trade-tracks{grid-template-columns:1fr}}
-
-
-.stamp.outline{
-  background:var(--paper);
-  color:var(--ink);
-  border-color:var(--ink);
-}
-
-
-/* Cleaner roadmap timeline */
-.timeline-body{padding:18px}
-.timeline-rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 18px;padding:12px;border:1px solid rgba(42,39,35,.35);background:rgba(244,241,232,.82)}
-.timeline-rule{font-size:.72rem;line-height:1.35}.timeline-rule b{display:block;font-family:"Bitter",Georgia,serif;text-transform:uppercase;margin-bottom:2px}
-.trade-chapter{margin:18px 0 8px;padding:7px 10px;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);font-family:"Bitter",Georgia,serif;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-.timeline-row{display:grid;grid-template-columns:minmax(180px,1.15fr) minmax(280px,2fr) minmax(145px,.8fr);gap:14px;align-items:center;padding:11px 10px;border-bottom:1px solid rgba(42,39,35,.22)}
-.timeline-row.current{border:2px solid var(--red);background:rgba(244,241,232,.88);box-shadow:3px 3px 0 rgba(42,39,35,.12)}
-.timeline-id b{display:block;font-family:"Bitter",Georgia,serif;font-size:.9rem;text-transform:uppercase}.timeline-id span{display:block;margin-top:2px;font-size:.72rem;font-weight:700}
-.phase-chain{display:flex;align-items:center;flex-wrap:wrap;gap:5px}.phase{padding:5px 7px;border:1px solid rgba(42,39,35,.45);background:rgba(255,255,255,.28);font-size:.64rem;font-weight:900;letter-spacing:.035em;text-transform:uppercase}
-.phase.active{border-color:var(--red);color:var(--red)}.phase.trade-phase{background:var(--ink);color:var(--paper);border-color:var(--ink)}.phase.buffer-phase{border-style:dashed;font-weight:900}.phase-arrow{font-weight:900;opacity:.5}
-.release-block{justify-self:stretch;padding:9px;background:var(--red);color:#f5f0e6;text-align:center;border:2px solid var(--ink);box-shadow:2px 2px 0 rgba(42,39,35,.18);font-family:"Bitter",Georgia,serif;font-weight:900;text-transform:uppercase}
-.release-block small{display:block;font-family:"Libre Franklin",Arial,sans-serif;font-size:.57rem;letter-spacing:.09em;margin-bottom:2px}.release-block.released{background:var(--ink)}
-.trade-release{margin:8px 0 20px;padding:10px;text-align:center;border:3px double var(--red);background:rgba(244,241,232,.95);font-family:"Bitter",Georgia,serif;font-weight:900;text-transform:uppercase;letter-spacing:.045em}
-.omnibus-release{margin-top:24px;background:var(--ink);color:var(--paper);border-color:var(--red);font-size:1.05rem}
-@media(max-width:760px){.timeline-rules{grid-template-columns:1fr 1fr}.timeline-row{grid-template-columns:1fr;gap:8px}.release-block{text-align:left}}@media(max-width:480px){.timeline-rules{grid-template-columns:1fr}}
-
-.quote-feature{display:flex;align-items:flex-end;justify-content:center;gap:0;margin:18px auto 0;max-width:820px;padding-left:72px;position:relative;z-index:2}
-.duff-portrait{width:118px;height:118px;object-fit:contain;object-position:center bottom;margin-left:-72px;margin-right:-18px;margin-bottom:-18px;z-index:2;filter:drop-shadow(2px 3px 0 rgba(42,39,35,.14))}
-.quote-of-week{position:relative;flex:1;min-height:78px;padding:12px 18px 12px 31px;border:1px solid rgba(42,39,35,.42);border-radius:15px;background:rgba(244,241,232,.94);box-shadow:2px 2px 0 rgba(42,39,35,.10);font-size:.78rem;line-height:1.4;text-align:left}
-.quote-of-week:before{content:"";position:absolute;left:-9px;bottom:24px;width:16px;height:16px;background:rgba(244,241,232,.94);border-left:1px solid rgba(42,39,35,.42);border-bottom:1px solid rgba(42,39,35,.42);transform:rotate(45deg)}
-.quote-label{display:block;font-family:"Bitter",Georgia,serif;font-size:.58rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:3px}
-.quote-text{font-family:"Bree Serif",Georgia,serif;font-size:.98rem}
-.quote-speaker{font-family:"Libre Franklin",Arial,sans-serif;font-size:.66rem;font-weight:800;opacity:.66;margin-left:5px;white-space:nowrap}
-@media(max-width:550px){.quote-feature{margin:12px 8px 0;padding-left:52px}.duff-portrait{width:88px;height:88px;margin-left:-52px;margin-right:-14px;margin-bottom:-18px}.quote-of-week{min-height:66px;padding:10px 11px 10px 23px}.quote-text{font-size:.84rem}.quote-speaker{display:block;margin:3px 0 0}}
-
+.trade-note{margin-top:16px;padding-top:12px;border-top:1px solid rgba(42,39,35,.35);font-size:.78rem;font-weight:700;line-height:1.55}
+.forecast-box{margin-top:30px;background:var(--panel);border:3px solid var(--line);box-shadow:5px 5px 0 var(--line);padding:20px}
+.forecast-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.forecast-box h3{font:700 23px "Bree Serif",Georgia,serif;margin:0 0 6px}
+.forecast-box p{font-size:12px;line-height:1.65;margin:5px 0}
+.pace-widget{min-width:250px;max-width:325px;width:100%;background:var(--panel2);border:2px solid var(--line);padding:11px 14px}
+.pace-widget label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;font-weight:900;text-transform:uppercase}
+.pace-widget output{font:800 22px "Bitter",Georgia,serif;color:var(--red)}
+.pace-widget input{display:block;width:100%;margin:12px 0 3px;accent-color:var(--red)}
+.pace-scale{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:800}
+.forecast-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.forecast-milestone{background:var(--panel2);border:1px solid #888;padding:14px 12px}
+.forecast-milestone small{font:900 10px "Libre Franklin",Arial,sans-serif;text-transform:uppercase;color:var(--muted);letter-spacing:.05em}
+.forecast-milestone strong{display:block;font:800 17px "Bitter",Georgia,serif;margin:7px 0}
+.forecast-milestone span{font-size:11px;color:var(--muted);font-weight:800}
+.forecast-summary{margin-top:15px;font-size:12px;line-height:1.7}
+.timeline-box{margin-top:32px;background:var(--panel);border:3px solid var(--line);box-shadow:6px 6px 0 var(--line);overflow:hidden}
+.timeline-button{width:100%;border:0;background:transparent;color:var(--ink);padding:20px;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;font:800 19px "Bitter",Georgia,serif}
+.timeline-button:hover{background:var(--panel2)}
+.timeline-sub{display:block;font:500 11px "Libre Franklin",Arial,sans-serif;color:var(--muted);margin-top:4px;text-transform:none}
+.timeline-body{display:none;border-top:2px solid var(--line);padding:18px}
+.timeline-body.open{display:block}
+.production-modes{border:2px solid var(--line);background:var(--panel2);padding:14px 16px;margin-bottom:20px}
+.production-modes h3{font:800 15px "Bitter",Georgia,serif;text-transform:uppercase;margin:0 0 9px;color:var(--red)}
+.production-modes p{font-size:12px;line-height:1.55;margin:4px 0}
+.t-item{display:grid;grid-template-columns:74px 1fr;gap:13px;position:relative;padding-bottom:22px}
+.t-item:not(:last-child):before{content:"";position:absolute;left:35px;top:34px;bottom:0;border-left:3px solid #888}
+.t-dot{width:70px;height:34px;display:grid;place-items:center;background:var(--ink);color:white;font:800 12px "Bitter",Georgia,serif;z-index:1}
+.t-dot.trade-dot{background:var(--red)}
+.t-card{border:1px solid #888;background:var(--panel2);padding:11px 13px}
+.t-card h4{font:700 17px "Bree Serif",Georgia,serif;margin:0 0 5px}
+.t-card p{margin:3px 0;font-size:12px;line-height:1.5}
+.t-card.alignment{border-left:5px solid var(--red)}
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.road-card{background:var(--panel);border:2px solid var(--line);padding:16px;line-height:1.5;font-size:13px}
+.road-card b{font:800 20px "Bitter",Georgia,serif;display:block;margin-bottom:5px}
+footer{text-align:center;margin-top:35px;font:800 10px "Bitter",Georgia,serif;letter-spacing:2px;color:#666}
+@media(max-width:850px){.issue-grid{grid-template-columns:repeat(2,1fr)}.stats,.forecast-grid{grid-template-columns:repeat(2,1fr)}.road{grid-template-columns:1fr}}
+@media(max-width:600px){body{background-size:100% auto;background-repeat:repeat-y;background-attachment:scroll;background-position:center top}.trade-break .trade-head,.forecast-top{display:block}.trade-break .trade-target{text-align:left;margin-top:10px}.trade-tracks{grid-template-columns:1fr}.pace-widget{margin-top:15px;max-width:none}}
+@media(max-width:550px){.issue-grid{grid-template-columns:1fr}.cover,.cover-fallback{height:360px}.stats{grid-template-columns:1fr 1fr}.wrap{width:92vw}header{padding:20px 16px}.forecast-grid{grid-template-columns:1fr 1fr}h1{font-size:clamp(31px,8vw,46px)}}
 </style>
 </head>
 <body>
@@ -187,234 +105,192 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter";letter-spacing:2
 <header>
   <h1>Sharpest Sword Production Tracker</h1>
   <p class="tagline">The sword is sharp. He is not.</p>
-  <div class="version">PRODUCTION DASHBOARD • 18-ISSUE PLAN</div>
+  <div class="version">V4.7 • Updated November 12, 2026 • 18-issue plan</div>
 </header>
-
-<div class="quote-feature" aria-label="Duff Quote of the Week">
-  <img class="duff-portrait" src="duff-quote.png" alt="Duff">
-  <div class="quote-of-week">
-    <span class="quote-label">Duff Quote of the Week</span>
-    <span class="quote-text" id="quoteText"></span>
-    <span class="quote-speaker" id="quoteSpeaker"></span>
-  </div>
-</div>
-
-<div class="priority-strip">
-  <div class="priority-heading">
-    <strong>Current Priority: Issue #5 — Buried Secrets</strong>
-    <div class="projected">Projected Release: Mid-November 2026</div>
-  </div>
-  <div class="priority-phases" aria-label="Issue 5 production phases">
-    <div class="priority-phase done">
-      <span class="phase-name">Pre-Production</span>
-      <span class="phase-state">Complete</span>
-      <div class="mini-bar"><div class="mini-fill" style="width:100%"></div></div>
-      <span class="phase-count">2 weeks ✓</span>
-    </div>
-    <div class="priority-phase active">
-      <span class="phase-name">Production</span>
-      <span class="phase-state">Current Phase</span>
-      <div class="mini-bar"><div class="mini-fill" style="width:91.7%"></div></div>
-      <span class="phase-count">22 / 24 pages · 92%</span>
-    </div>
-    <div class="priority-phase">
-      <span class="phase-name">Post-Production</span>
-      <span class="phase-state">Up Next</span>
-      <div class="mini-bar"><div class="mini-fill" style="width:0%"></div></div>
-      <span class="phase-count">3–4 weeks</span>
-    </div>
-    <div class="priority-phase">
-      <span class="phase-name">Release</span>
-      <span class="phase-state">Target</span>
-      <div class="mini-bar"><div class="mini-fill" style="width:0%"></div></div>
-      <span class="phase-count">Mid-Nov</span>
-    </div>
-  </div>
-</div>
-
 <div class="stats" id="stats"></div>
-
-<h2 class="section-title">📚 Issues <span>#1–9</span></h2>
+<div class="priority-strip">
+  <strong>Current Priority: Issue #5 Post-Production + Issue #6 Preparation</strong>
+  <div class="projected">Issue #5 estimated release: Early December 2026</div>
+  <div class="detail">The drawing and inking for #5 are finished. Release timing assumes around three weeks of post-production from the latest progress update; not an announced release date.</div>
+</div>
+<h2 class="section-title">📚 Issues <span>#1–8</span></h2>
 <div class="issue-grid" id="issues"></div>
-
-
-
+<section class="forecast-box" aria-labelledby="forecast-title">
+  <div class="forecast-top">
+    <div>
+      <h3 id="forecast-title">🎨 Coloring Forecast</h3>
+      <p><strong>66 of 144 pages colored.</strong> Change the weekly pace to see when Issues #3–6 could be done.</p>
+      <p>Forecast starts November 12, 2026. Page counts are current as of November 11.</p>
+    </div>
+    <div class="pace-widget">
+      <label for="pace">Colored pages / week <output id="paceOutput" for="pace">2.9</output></label>
+      <input type="range" id="pace" min="1.5" max="4.5" value="2.9" step="0.1" aria-label="Coloring pages completed per week">
+      <div class="pace-scale"><span>1.5 / week</span><span>4.5 / week</span></div>
+    </div>
+  </div>
+  <div class="forecast-grid" id="forecasts"></div>
+  <div class="forecast-summary" id="forecastSummary"></div>
+</section>
 <section class="timeline-box">
-  <button class="timeline-button" id="timelineToggle">
-    <span>📅 FULL 18-ISSUE PRODUCTION TIMELINE
-      <span class="timeline-sub">Projected production & release schedule</span>
-    </span>
+  <button class="timeline-button" id="timelineToggle" type="button" aria-expanded="false" aria-controls="timeline">
+    <span>📅 FULL 18-ISSUE PRODUCTION TIMELINE<span class="timeline-sub">Planning dates, releases and coloring alignment</span></span>
     <span id="timelineArrow">View Timeline ▼</span>
   </button>
   <div class="timeline-body" id="timeline"></div>
 </section>
-
 <h2 class="section-title">🗺 The <span>Road Ahead</span></h2>
 <div class="road">
-  <div class="road-card"><b>June 2027</b>Issue #6 + Trade #1 release together after Trade Completion.</div>
-  <div class="road-card"><b>November 2029</b>Projected Issue #12 + Trade #2 joint release.</div>
-  <div class="road-card"><b>March 2032</b>Projected Issue #18 + Trade #3 joint release.</div>
-  <div class="road-card"><b>September 2032</b>Projected complete-series Omnibus release.</div>
+  <div class="road-card"><b>June 2027</b>Target: Issue #6 and Trade #1 release together, provided final coloring, post-production, proofing, and printing are ready.</div>
+  <div class="road-card"><b>~May 2029</b>Previous planning target: Issue #12 and Trade #2 joint release. Will need recalibration as the series progresses.</div>
+  <div class="road-card"><b>~May 2031</b>Previous planning target: Issue #18 and the end of the 18-issue production plan.</div>
 </div>
-
-<footer>SHARPEST SWORD • PRODUCTION TRACKER • 18-ISSUE PLAN</footer>
+<footer>SHARPEST SWORD • PRODUCTION TRACKER • V4.7</footer>
 </div>
-
 <script>
-const weeklyQuotes=[
-  // 26 hand-picked Duff quotes from released issues #1–#4, intentionally shuffled.
-  {q:"I’m actually a guard, too.",s:"— Duff · Issue #3"},
-  {q:"Taste! The! Justice!",s:"— Duff · Issue #1"},
-  {q:"I always wanted to sit on a throne!",s:"— Duff · Issue #2"},
-  {q:"This one’s about the migration patterns of hummingbears. Is that helpful?",s:"— Duff · Issue #3"},
-  {q:"Got it! No sword friend.",s:"— Duff · Issue #4"},
-  {q:"What are you doing with your little arms?",s:"— Duff · Issue #1"},
-  {q:"DO I GET TO NAME YOU?!",s:"— Duff · Issue #2"},
-  {q:"GUYS! I FOUND A HOLE!",s:"— Duff · Issue #1"},
-  {q:"Did you find it after a mysterious explosion caused a sinkhole into a lost city?",s:"— Duff · Issue #3"},
-  {q:"I’m not really over Rat Bane is all…",s:"— Duff · Issue #2"},
-  {q:"BANE SOME RATS!",s:"— Duff · Issue #1"},
-  {q:"Are you on our side, or do you just have really bad aim?",s:"— Duff · Issue #3"},
-  {q:"Yeah, The Captain says I should stop eating the cakes.",s:"— Duff · Issue #2"},
-  {q:"KILLED ALL THE RATS!",s:"— Duff · Issue #1"},
-  {q:"You can be Sir Hackenslash!",s:"— Duff · Issue #2"},
-  {q:"This thing is super cute when it’s not trying to eat us! Do you think they’ll let us keep him?",s:"— Duff · Issue #4"},
-  {q:"I don’t think there were any stairs here before…",s:"— Duff · Issue #1"},
-  {q:"I just got why it’s called Overmine. It’s over the mine.",s:"— Duff · Issue #2"},
-  {q:"Gotcha, you little, uh, rat.",s:"— Duff · Issue #1"},
-  {q:"Also we can’t tell anyone, it’s a seeeecret.",s:"— Duff · Issue #2"},
-  {q:"I have two ears! But only one is an Elf ear. I’m a Half-Elf.",s:"— Duff · Issue #3"},
-  {q:"WE’RE GOING ON AN ADVENTURE AND/OR EXPLORATORY JOURNEY!",s:"— Duff · Issue #2"},
-  {q:"It’s RAT BANE!",s:"— Duff · Issue #1"},
-  {q:"…are you a boy sword or a girl sword?",s:"— Duff · Issue #2"},
-  {q:"Hm, it’s pretty much just a normal chair with more pillows.",s:"— Duff · Issue #2"},
-  {q:"A mysterious explosion that no one can be blamed for opened it up.",s:"— Duff · Issue #2"}
-];
-// Monday-based week number so everyone sees the same quote for the full week.
-const now=new Date();
-const utcDate=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()));
-const day=(utcDate.getUTCDay()+6)%7;
-utcDate.setUTCDate(utcDate.getUTCDate()-day);
-const quoteWeek=Math.floor(utcDate.getTime()/(7*86400000));
-const weeklyQuote=weeklyQuotes[quoteWeek%weeklyQuotes.length];
-document.getElementById("quoteText").textContent='“'+weeklyQuote.q+'”';
-document.getElementById("quoteSpeaker").textContent=weeklyQuote.s;
+"use strict";
 
-function tradeProgress(label,current,total){
- const pct=total?Math.min(100,(current/total)*100):0;
- return `<div class="trade-track"><div class="trade-row"><span>${label}</span><span>${current} / ${total}</span></div><div class="bar"><div class="fill" style="width:${pct}%"></div></div></div>`;
-}
-function tradeOneCard(){
- const t=issues.filter(i=>i.issue<=6);
- const scripts=t.filter(i=>i.scriptComplete!==false).length;
- const finished=t.reduce((s,i)=>s+i.inks,0);
- const colored=t.reduce((s,i)=>s+i.colors,0);
- const released=t.filter(i=>i.status==="released").length;
- const complete=scripts===6&&finished===144&&colored===144&&released===6;
- return `<article class="trade-break">
- <div class="trade-head"><div><h3>📕 TRADE #1 — ISSUES #1–6</h3><div class="trade-sub">${complete?"Complete":"In Production"}</div></div>
- <div class="trade-target">Projected: June 2027<small>Issue #6 + Trade #1 release together</small></div></div>
- <div class="trade-tracks">${tradeProgress("Scripts",scripts,6)}${tradeProgress("Finished Pages",finished,144)}${tradeProgress("Colored Pages",colored,144)}${tradeProgress("Issues Released",released,6)}</div>
- <div class="trade-note"><strong>Trade Completion:</strong> Issue #6 brings finished art and coloring together so all 144 pages are ready for Trade #1. Issue #7 begins after the joint release.</div>
- </article>`;
-}
-
-const issues = [
+// Edit these values as new progress comes in. Each issue is 24 story pages.
+const SNAPSHOT_DATE = "2026-11-12";
+const ISSUES = [
  {issue:1,title:"Rat Bane",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:24,cover:"issue-1.jpg",script:"https://docs.google.com/document/d/1OBiItEdxrTMnZ20lnMGa5WfR0bePIrzZbQViwfaw4Zc/edit?tab=t.0#heading=h.4eabj3le0n2r"},
  {issue:2,title:"The Talking Sword",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:24,cover:"issue-2.jpg",script:"https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:3,title:"Welcome to Drukhovi",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:9,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
+ {issue:3,title:"Welcome to Drukhovi",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:18,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
  {issue:4,title:"Food Fight",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"issue-4.jpg",script:"https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:5,title:"Buried Secrets",status:"production",scriptComplete:true,pages:24,sketches:24,inks:21,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
+ {issue:5,title:"Buried Secrets",status:"production",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
  {issue:6,title:"Field Trip",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"},
  {issue:7,title:"What Happens in Stonefort",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"},
- {issue:8,title:"Untitled",status:"script",scriptComplete:false,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1nXkTz5Nk-3A5tLnsFV5McuC3ZHR3ko9H4UUUJUNQL8s/edit?tab=t.0"},
- {issue:9,title:"Untitled",status:"outline",scriptComplete:false,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"#"}
+ {issue:8,title:"Untitled",status:"script",scriptComplete:false,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1nXkTz5Nk-3A5tLnsFV5McuC3ZHR3ko9H4UUUJUNQL8s/edit?tab=t.0"}
 ];
+const statusNames={released:"Released",production:"In Production",preproduction:"Pre-Production",script:"Script in Progress"};
+const tradeOne=ISSUES.filter(i=>i.issue<=6);
+const totalPages=tradeOne.reduce((sum,i)=>sum+i.pages,0);
+const totalColor=tradeOne.reduce((sum,i)=>sum+i.colors,0);
+const totalInk=tradeOne.reduce((sum,i)=>sum+i.inks,0);
+const totalSketches=tradeOne.reduce((sum,i)=>sum+i.sketches,0);
+const released=ISSUES.filter(i=>i.status==="released").length;
+const issue5=ISSUES.find(i=>i.issue===5);
+const pct=(a,b)=>b?Math.min(100,Math.round(a/b*1000)/10):0;
 
-const statusNames={released:"Released",production:"In Production",preproduction:"Pre-Production",script:"Script in Progress",outline:"Outline Complete"};
-const totalColor=issues.slice(0,6).reduce((a,x)=>a+x.colors,0);
+// Stats use live counts rather than duplicated hard-coded totals.
 document.getElementById("stats").innerHTML=`
- <div class="stat"><b>4 / 18</b><small>Issues Released</small></div>
- <div class="stat"><b>22 / 24</b><small>Issue #5 Inked</small></div>
- <div class="stat"><b>24 / 24</b><small>Issue #5 Sketched</small></div>
- <div class="stat"><b>${totalColor} / 144</b><small>Trade #1 Colored</small></div>`;
-
+ <div class="stat"><b>${released} / 18</b><small>Issues Released</small></div>
+ <div class="stat"><b>${issue5.inks} / ${issue5.pages}</b><small>Issue #5 Inked</small></div>
+ <div class="stat"><b>${issue5.sketches} / ${issue5.pages}</b><small>Issue #5 Sketched</small></div>
+ <div class="stat"><b>${totalColor} / ${totalPages}</b><small>Trade #1 Colored • ${pct(totalColor,totalPages)}%</small></div>`;
 function progress(label,value,total){
- const pct=Math.min(100,(value/total)*100);
- return `<div class="progress-row"><div class="progress-label"><span>${label}</span><span>${value}/${total}</span></div><div class="bar"><div class="fill" style="width:${pct}%"></div></div></div>`;
+ return `<div class="progress-row"><div class="progress-label"><span>${label}</span><span>${value}/${total}</span></div><div class="bar"><div class="fill" style="width:${pct(value,total)}%"></div></div></div>`;
 }
-document.getElementById("issues").innerHTML=issues.map(i=>`
- <article class="issue ${i.status==="production" ? "current-priority" : ""}">
-   <img class="cover" src="${i.cover || "wipcover.jpg"}" alt="${i.cover ? `Issue ${i.issue} cover` : `Work-in-progress cover for Issue ${i.issue}`}">
-   <div class="issue-no">Issue #${i.issue}</div>
-   <h3>${i.title}</h3>
+function tradeProgress(label,current,total){
+ return `<div class="trade-track"><div class="trade-row"><span>${label}</span><span>${current} / ${total}</span></div><div class="bar"><div class="fill" style="width:${pct(current,total)}%"></div></div></div>`;
+}
+function tradeOneCard(){
+ const scripts=tradeOne.filter(i=>i.scriptComplete).length;
+ const total=tradeOne.length;
+ const countReleased=tradeOne.filter(i=>i.status==="released").length;
+ const complete=scripts===total&&totalInk===totalPages&&totalColor===totalPages&&countReleased===total;
+ return `<article class="trade-break">
+   <div class="trade-head"><div><h3>📕 TRADE #1 — ISSUES #1–6</h3><div class="trade-sub">${complete?"Complete":"In Production"}</div></div>
+   <div class="trade-target">Target: June 2027<small>Issue #6 + Trade #1 together, conditional on final art & print</small></div></div>
+   <div class="trade-tracks">
+     ${tradeProgress("Scripts",scripts,total)}
+     ${tradeProgress("Sketched Pages",totalSketches,totalPages)}
+     ${tradeProgress("Inked Pages",totalInk,totalPages)}
+     ${tradeProgress("Colored Pages",totalColor,totalPages)}
+     ${tradeProgress("Issues Released",countReleased,total)}
+   </div>
+   <div class="trade-note"><strong>Coloring Alignment:</strong> ${totalColor} of ${totalPages} pages colored (${pct(totalColor,totalPages)}%). Issue #6 must be drawn and inked while the remaining ${totalPages-totalColor} pages are colored. A June release also requires cover, lettering, proofing and printing.</div>
+ </article>`;
+}
+function coverMarkup(i){
+ const file=i.cover || "wipcover.jpg";
+ const fallback=`<div class="cover-fallback" role="img" aria-label="Issue ${i.issue} cover placeholder">ISSUE #${i.issue}<br>ART / COVER PENDING</div>`;
+ return `<img class="cover" src="${file}" alt="Issue ${i.issue} cover" onerror="this.outerHTML=decodeURIComponent(this.dataset.fallback)" data-fallback="${encodeURIComponent(fallback)}">`;
+}
+document.getElementById("issues").innerHTML=ISSUES.map(i=>`
+ <article class="issue ${i.status==="production"?"current-priority":""}">
+   ${coverMarkup(i)}
+   <div class="issue-no">Issue #${i.issue}</div><h3>${i.title}</h3>
    <span class="stamp ${i.status}">${statusNames[i.status]}</span>
-   ${i.colors===i.pages ? `<span class="stamp colored">Colored</span>` : `
-     ${progress("Sketched",i.sketches,i.pages)}
-     ${progress("Inked",i.inks,i.pages)}
-     ${progress("Colored",i.colors,i.pages)}
-   `}
-   <a class="script-link" href="${i.script}" target="_blank" rel="noopener">Open Script ↗</a>
+   ${i.inks===i.pages && i.status==="production"?`<span class="stamp inked">All Art Inked</span>`:""}
+   ${i.colors===i.pages?`<span class="stamp colored">Colored</span>`:
+     progress("Sketched",i.sketches,i.pages)+progress("Inked",i.inks,i.pages)+progress("Colored",i.colors,i.pages)}
+   <a class="script-link" href="${i.script}" target="_blank" rel="noopener noreferrer">Open Script ↗</a>
  </article>
- ${i.issue===6 ? tradeOneCard() : ""}`).join("");
+ ${i.issue===6?tradeOneCard():""}`).join("");
 
-/*
- V4 timeline model.
- The long-range dates are planning projections. They intentionally use month-level
- precision because family/school schedules and production speed will vary.
-*/
-const timelineData=[
- {issue:1,title:"Rat Bane",phases:["Released"],released:true,release:"Dec 2024"},
- {issue:2,title:"The Talking Sword",phases:["Released"],released:true,release:"June 2025"},
- {issue:3,title:"Welcome to Drukhovi",phases:["Released"],released:true,release:"Dec 2025"},
- {issue:4,title:"Food Fight",phases:["Released"],released:true,release:"June 2026"},
- {issue:5,title:"Buried Secrets",phases:["Production","Post-Production"],active:"Production",release:"Mid-Nov 2026"},
- {issue:6,title:"Field Trip",phases:["Pre-Production","Production","Post-Production","Trade Completion"],release:"June 2027",tradeEnd:1},
- {issue:7,title:"What Happens in Stonefort",phases:["Pre-Production","Production","Post-Production"],release:"Nov 2027"},
- {issue:8,title:null,phases:["Pre-Production","Production","Post-Production","Double-Issue Buffer"],release:"Feb 2028"},
- {issue:9,title:null,phases:["Pre-Production","Production","Post-Production"],release:"July 2028"},
- {issue:10,title:null,phases:["Pre-Production","Production","Post-Production","Double-Issue Buffer"],release:"Dec 2028"},
- {issue:11,title:null,phases:["Pre-Production","Production","Post-Production"],release:"May 2029"},
- {issue:12,title:null,phases:["Pre-Production","Production","Post-Production","Trade Completion"],release:"Nov 2029",tradeEnd:2},
- {issue:13,title:null,phases:["Pre-Production","Production","Post-Production"],release:"Apr 2030"},
- {issue:14,title:null,phases:["Pre-Production","Production","Post-Production","Double-Issue Buffer"],release:"Aug 2030"},
- {issue:15,title:null,phases:["Pre-Production","Production","Post-Production"],release:"Jan 2031"},
- {issue:16,title:null,phases:["Pre-Production","Production","Post-Production","Double-Issue Buffer"],release:"May 2031"},
- {issue:17,title:null,phases:["Pre-Production","Production","Post-Production"],release:"Oct 2031"},
- {issue:18,title:null,phases:["Pre-Production","Production","Post-Production","Trade Completion"],release:"Mar 2032",tradeEnd:3}
+// Color projections assume consecutive issue order and a steady average weekly pace.
+// Dates are forecasts, NOT announced publication dates.
+function futureDate(totalPagesNeeded, weeklyPace){
+ const start=new Date(`${SNAPSHOT_DATE}T12:00:00`);
+ start.setDate(start.getDate()+Math.ceil((totalPagesNeeded/weeklyPace)*7));
+ return start;
+}
+function formatDate(d){return d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});}
+function datesForPace(pace){
+ let remaining=0;
+ return tradeOne.filter(i=>i.issue>=3).map(i=>{
+   remaining+=(i.pages-i.colors);
+   return {issue:i.issue,title:i.title,remaining,date:futureDate(remaining,pace)};
+ });
+}
+function renderColorForecast(){
+ const pace=Number(document.getElementById("pace").value);
+ document.getElementById("paceOutput").textContent=pace.toFixed(1);
+ const forecasts=datesForPace(pace);
+ document.getElementById("forecasts").innerHTML=forecasts.map(f=>`
+  <div class="forecast-milestone"><small>Issue #${f.issue} coloring done</small>
+    <strong>${formatDate(f.date)}</strong><span>${f.remaining} cumulative pages remaining</span></div>`).join("");
+ const end=forecasts[forecasts.length-1].date;
+ const juneGoal=new Date("2027-06-01T12:00:00");
+ const onTrack=end<=juneGoal;
+ document.getElementById("forecastSummary").innerHTML=
+ `<strong>Trade #1 coloring:</strong> ${pct(totalColor,totalPages)}% complete • ${totalPages-totalColor} pages remaining. 
+ At <strong>${pace.toFixed(1)} pages/week</strong>, projected coloring completion is <strong>${formatDate(end)}</strong>. 
+ ${onTrack?"This could leave time before the June 2027 target for post-production and print preparation, depending on Issue #6 art.":"This would push coloring into June 2027 or later; the June joint-release target would be at risk."}
+ <br><em>Forecasts only: weekends, breaks, revisions, and the timing of Issue #6 line art can shift these dates.</em>`;
+}
+document.getElementById("pace").addEventListener("input",renderColorForecast);
+renderColorForecast();
+
+// The 2028–2031 targets below are inherited high-level planning estimates from V4.6.
+// They are not recalculated from the coloring slider, and should not be read as commitments.
+const timeline=[
+ ["#1","Rat Bane","Released",""],
+ ["#2","The Talking Sword","Released",""],
+ ["#3","Welcome to Drukhovi","Released in black & white","Coloring: 18 / 24 pages done as of Nov. 11, 2026"],
+ ["#4","Food Fight","Released in black & white","Coloring to follow Issue #3"],
+ ["#5","Buried Secrets","Sketches 24/24 • Inked 24/24 • Art complete as of Nov. 11, 2026","Post-production: ~3 weeks • estimated release: early Dec. 2026"],
+ ["#6","Field Trip","Preparation: November 2026 • drawing/inking targeted Dec. 2026 → spring 2027","Coloring Alignment during #6 • Target: Issue #6 + Trade #1 joint release June 2027"],
+ ["#7","What Happens in Stonefort","Pre-production: late June 2027 • Art: July → September 2027","Post-production: ~1 month • Tentative release: October 2027"],
+ ["#8","Issue 8","Pre-production: October 2027 • Art: October → December 2027","Tentative release: January 2028"],
+ ["#9","Issue 9","Pre-production: Jan./Feb. 2028 • Art: Feb. → April 2028","Tentative release: May 2028"],
+ ["#10","Issue 10","Pre-production: May 2028 • Art: May → July/Aug. 2028","Tentative release: September 2028"],
+ ["#11","Issue 11","Pre-production: September 2028 • Art: Sept. → November 2028","Tentative release: December 2028"],
+ ["#12","Issue 12","Pre-production: Dec. 2028/Jan. 2029 • Art: January → March 2029","Tentative Issue #12 + Trade #2 release: May 2029"],
+ ["#13","Issue 13","Pre-production: May/June 2029 • Art: June → August 2029","Tentative release: Sept./Oct. 2029"],
+ ["#14","Issue 14","Pre-production: October 2029 • Art: Oct. → December 2029","Tentative release: January 2030"],
+ ["#15","Issue 15","Pre-production: Jan./Feb. 2030 • Art: Feb. → April 2030","Tentative release: May 2030"],
+ ["#16","Issue 16","Pre-production: May 2030 • Art: May → July/Aug. 2030","Tentative release: September 2030"],
+ ["#17","Issue 17","Pre-production: September 2030 • Art: Sept. → November 2030","Tentative release: December 2030"],
+ ["#18","Issue 18","Pre-production: Dec. 2030/Jan. 2031 • Art: Jan. → March 2031","Tentative issue #18 / end of series: May 2031"]
 ];
-function phaseChain(item){
- if(item.released)return `<div class="phase-chain"><span class="phase">Complete</span></div>`;
- return `<div class="phase-chain">${item.phases.map((p,n)=>`${n?'<span class="phase-arrow">→</span>':''}<span class="phase ${p===item.active?'active':''} ${p==="Trade Completion"?'trade-phase':p==="Double-Issue Buffer"?'buffer-phase':''}">${p}</span>`).join("")}</div>`;
-}
-function chapterFor(issue){
- if(issue===1)return `<div class="trade-chapter">Trade #1 · Issues #1–6</div>`;
- if(issue===7)return `<div class="trade-chapter">Trade #2 · Issues #7–12</div>`;
- if(issue===13)return `<div class="trade-chapter">Trade #3 · Issues #13–18</div>`;
- return "";
-}
-document.getElementById("timeline").innerHTML=`
- <div class="timeline-rules">
-  <div class="timeline-rule"><b>Pre-Production</b>2 weeks · planning + cover</div>
-  <div class="timeline-rule"><b>Production</b>Interior art · typically 2–3 pages / week during the school year</div>
-  <div class="timeline-rule"><b>Post-Production</b>3–4 weeks · finalization + release prep</div>
-  <div class="timeline-rule"><b>Cadence Goal</b>About one issue every 4.5 months on average · summer can run slower</div><div class="timeline-rule"><b>Trade Completion</b>Final coloring + collected-edition production</div><div class="timeline-rule"><b>Double-Issue Buffer</b>Extra post-production time after Issues #8, #10, #14 and #16</div>
- </div>
- ${timelineData.map(item=>`
-  ${chapterFor(item.issue)}
-  <div class="timeline-row ${item.issue===5?'current':''}">
-   <div class="timeline-id"><b>Issue #${item.issue}${item.title?` · ${item.title}`:""}</b><span>${item.issue===5?"Current production priority":item.released?"Released":item.tradeEnd?"Trade endpoint":"Projected production"}</span></div>
-   ${phaseChain(item)}
-   <div class="release-block ${item.released?'released':''}"><small>${item.released?"Status":"Projected Release"}</small>${item.release}</div>
-  </div>
-  ${item.tradeEnd?`<div class="trade-release">Trade #${item.tradeEnd} Release · ${item.release}${item.tradeEnd===1?" · Issue #6 + Trade #1 together":item.tradeEnd===2?" · Issue #12 + Trade #2 together":" · Issue #18 + Trade #3"}</div>`:""}
- `).join("")}
- <div class="trade-release omnibus-release">📚 OMNIBUS RELEASE · SEPTEMBER 2032</div>
-`;
-
-const btn=document.getElementById("timelineToggle"), body=document.getElementById("timeline"), arrow=document.getElementById("timelineArrow");
-btn.addEventListener("click",()=>{
- const open=body.classList.toggle("open");
+const productionModes=`<div class="production-modes">
+ <h3>Production Modes & Assumptions</h3>
+ <p><b>Issue #5:</b> Sketching and inking complete. Post-production estimate: 3 weeks.</p>
+ <p><b>Coloring now:</b> Recent observed pace: ~2.9 pages/week (10 pages from Oct. 18 to Nov. 11). Change the slider above to model a different pace.</p>
+ <p><b>Issue #6 — Coloring Alignment:</b> Original drawing plan: 1.5 sketched and 1.5 inked pages per week, with 3–4 colored pages per week as an aspirational catch-up mode.</p>
+ <p><b>Issue #7 onward — School Year:</b> Original plan: 3 sketched / 3 inked / 2–3 colored pages per week. <b>Summer (June–July):</b> 2 / 2 / 2 pages per week.</p>
+ <p><b>Pre-production:</b> Assume two weeks per new issue. Long-range release months are tentative and have not been recomputed from real-time production rates.</p>
+ </div>`;
+document.getElementById("timeline").innerHTML=productionModes+timeline.map((t,idx)=>{
+ const trade=[5,11,17].includes(idx),alignment=idx===5;
+ return `<div class="t-item"><div class="t-dot ${trade?"trade-dot":""}">${t[0]}</div>
+ <div class="t-card ${alignment?"alignment":""}"><h4>${t[1]}${alignment?" — 🎨 Coloring Alignment":""}</h4><p>${t[2]}</p>${t[3]?`<p class="projected">${t[3]}</p>`:""}</div></div>`;
+}).join("");
+const button=document.getElementById("timelineToggle"),timelineBody=document.getElementById("timeline"),arrow=document.getElementById("timelineArrow");
+button.addEventListener("click",()=>{
+ const open=timelineBody.classList.toggle("open");
+ button.setAttribute("aria-expanded",String(open));
  arrow.textContent=open?"Hide Timeline ▲":"View Timeline ▼";
 });
 </script>
