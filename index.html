@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#d8d8d3">
-<title>Sharpest Sword Production Tracker — V4.7</title>
+<title>Sharpest Sword Production Tracker — V5.5</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Bree+Serif&family=Libre+Franklin:wght@500;700;900&display=swap');
 :root{
@@ -17,7 +17,7 @@ html{scroll-behavior:smooth}
 body{margin:0;color:var(--ink);font-family:"Libre Franklin",Arial,sans-serif;background:var(--paper) url("background.jpg") center top / cover fixed}
 .wrap{width:min(1180px,94vw);margin:auto;padding:30px 0 45px}
 header{border:3px solid var(--line);background:var(--panel);padding:24px 25px 20px;box-shadow:7px 7px 0 var(--line);position:relative;overflow:hidden}
-header:before{content:"V4.7";position:absolute;right:20px;top:12px;font:800 64px/1 "Bitter",Georgia,serif;color:rgba(32,32,31,.06);transform:rotate(-4deg);pointer-events:none}
+header:before{content:"V5.5";position:absolute;right:20px;top:12px;font:800 64px/1 "Bitter",Georgia,serif;color:rgba(32,32,31,.06);transform:rotate(-4deg);pointer-events:none}
 h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif",Georgia,serif;margin:0;letter-spacing:-1px;position:relative}
 .tagline{font:700 15px "Bitter",Georgia,serif;text-transform:uppercase;letter-spacing:2px;margin:11px 0 0;color:var(--red)}
 .version{margin-top:9px;color:var(--muted);font-size:12px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
@@ -42,7 +42,7 @@ h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif",Georgia,serif;margin:0;lett
 .stamp{display:inline-block;align-self:flex-start;margin:8px 0;padding:5px 8px;border:2px solid currentColor;font:800 10px "Bitter",Georgia,serif;letter-spacing:1px;text-transform:uppercase;transform:rotate(-1deg)}
 .stamp.released,.stamp.inked{color:var(--green)}
 .stamp.colored{color:#50677a}.stamp.production{color:var(--red)}
-.stamp.preproduction{color:var(--gold)}.stamp.script{color:#69645b}
+.stamp.postproduction{color:var(--red)}.stamp.preproduction{color:var(--gold)}.stamp.script{color:#69645b}
 .progress-row{margin:10px 0 0}
 .progress-label{display:flex;justify-content:space-between;gap:6px;font-size:11px;font-weight:900;text-transform:uppercase}
 .bar{height:9px;background:#bdbdb8;border:1px solid #777;margin-top:4px}
@@ -91,13 +91,45 @@ h1{font:normal clamp(34px,6vw,66px)/.95 "Bree Serif",Georgia,serif;margin:0;lett
 .t-card h4{font:700 17px "Bree Serif",Georgia,serif;margin:0 0 5px}
 .t-card p{margin:3px 0;font-size:12px;line-height:1.5}
 .t-card.alignment{border-left:5px solid var(--red)}
-.road{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
 .road-card{background:var(--panel);border:2px solid var(--line);padding:16px;line-height:1.5;font-size:13px}
 .road-card b{font:800 20px "Bitter",Georgia,serif;display:block;margin-bottom:5px}
 footer{text-align:center;margin-top:35px;font:800 10px "Bitter",Georgia,serif;letter-spacing:2px;color:#666}
-@media(max-width:850px){.issue-grid{grid-template-columns:repeat(2,1fr)}.stats,.forecast-grid{grid-template-columns:repeat(2,1fr)}.road{grid-template-columns:1fr}}
+@media(max-width:850px){.issue-grid{grid-template-columns:repeat(2,1fr)}.stats,.forecast-grid{grid-template-columns:repeat(2,1fr)}.road{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){body{background-size:100% auto;background-repeat:repeat-y;background-attachment:scroll;background-position:center top}.trade-break .trade-head,.forecast-top{display:block}.trade-break .trade-target{text-align:left;margin-top:10px}.trade-tracks{grid-template-columns:1fr}.pace-widget{margin-top:15px;max-width:none}}
 @media(max-width:550px){.issue-grid{grid-template-columns:1fr}.cover,.cover-fallback{height:360px}.stats{grid-template-columns:1fr 1fr}.wrap{width:92vw}header{padding:20px 16px}.forecast-grid{grid-template-columns:1fr 1fr}h1{font-size:clamp(31px,8vw,46px)}}
+
+/* V5.5: Restore the weekly Duff feature and four-phase Current Priority module. */
+.hero-features{margin:18px 0 23px;position:relative}
+.duff-quote{position:relative;min-height:188px;padding:19px 250px 19px 23px;
+ border:3px solid var(--line);background:var(--panel);box-shadow:5px 5px 0 rgba(42,39,35,.2);
+ overflow:visible;isolation:isolate;}
+.quote-eyebrow{font:900 12px "Bitter",Georgia,serif;color:var(--red);letter-spacing:1.1px;text-transform:uppercase}
+.duff-quote blockquote{font:700 clamp(19px,2.4vw,29px)/1.3 "Bree Serif",Georgia,serif;margin:13px 0 8px;max-width:730px}
+.quote-caption{font:700 11px "Libre Franklin",Arial,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.duff-portrait{position:absolute;z-index:4;right:34px;bottom:-22px;max-height:235px;max-width:205px;width:auto;object-fit:contain;object-position:bottom center;filter:drop-shadow(3px 3px 0 rgba(20,20,18,.18));pointer-events:none}
+.duff-portrait-fallback{position:absolute;z-index:1;right:31px;bottom:6px;display:none;
+ width:172px;height:137px;border-radius:50% 50% 10% 10%;background:var(--panel2);
+ border:2px dashed #999;place-items:center;text-align:center;font:900 17px "Bitter",Georgia,serif;letter-spacing:.13em;color:var(--red)}
+.duff-portrait-fallback small{display:block;font-size:9px;letter-spacing:.02em;color:var(--muted)}
+.priority-phases{position:relative;margin-top:10px;z-index:2;background:rgba(244,241,232,.98);border:3px solid var(--red);box-shadow:4px 4px 0 rgba(42,39,35,.16);padding:18px 16px 15px}
+.priority-heading{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-bottom:13px;flex-wrap:wrap}
+.priority-heading .eyebrow{font:900 11px "Bitter",Georgia,serif;color:var(--red);letter-spacing:.1em;text-transform:uppercase}
+.priority-heading h2{margin:5px 0 0;font:700 clamp(20px,2.5vw,26px) "Bree Serif",Georgia,serif}
+.priority-heading .projected{font-size:11px;text-transform:uppercase;letter-spacing:.045em;max-width:300px;text-align:right}
+.phases-grid{display:grid;grid-template-columns:1fr 1.25fr 1fr .9fr;gap:9px}
+.phase{border:2px solid var(--line);padding:12px 10px;min-height:93px;background:var(--panel2)}
+.phase small{display:block;color:var(--muted);font:900 9px "Libre Franklin",Arial,sans-serif;letter-spacing:.08em;margin-bottom:7px}
+.phase strong{font:800 12px "Bitter",Georgia,serif;text-transform:uppercase;display:block;margin-bottom:8px}
+.phase span{font:700 11px "Libre Franklin",Arial,sans-serif;line-height:1.5}
+.phase.done{background:#d5dfd3;border-color:#55715c}.phase.done strong{color:#3c684a}
+.phase.active{background:#eee0d8;border:3px solid var(--red);padding:11px 9px}.phase.active strong{color:var(--red)}
+.phase.pending{background:#e5e1d8;border-color:#929087}
+.priority-foot{margin:13px 0 0;font-size:11px;line-height:1.55;color:var(--muted)}
+@media(max-width:850px){.duff-quote{padding-right:200px}.duff-portrait{right:12px;max-width:175px;max-height:210px}}
+@media(max-width:650px){.phases-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.priority-heading .projected{text-align:left}.duff-quote{min-height:173px;padding:16px 145px 17px 17px}.duff-portrait{max-width:128px;max-height:155px;right:6px;bottom:-11px}.duff-portrait-fallback{width:110px;height:100px;right:5px}.duff-quote blockquote{font-size:19px}.phase{min-height:89px}}
+@media(max-width:360px){.duff-quote{padding-right:105px}.duff-portrait{max-width:96px}.duff-quote blockquote{font-size:17px}}
+
 </style>
 </head>
 <body>
@@ -105,14 +137,31 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter",Georgia,serif;le
 <header>
   <h1>Sharpest Sword Production Tracker</h1>
   <p class="tagline">The sword is sharp. He is not.</p>
-  <div class="version">V4.7 • Updated November 12, 2026 • 18-issue plan</div>
+  <div class="version">V5.5 • Restored and updated November 12, 2026 • 18-issue plan</div>
 </header>
-<div class="stats" id="stats"></div>
-<div class="priority-strip">
-  <strong>Current Priority: Issue #5 Post-Production + Issue #6 Preparation</strong>
-  <div class="projected">Issue #5 estimated release: Early December 2026</div>
-  <div class="detail">The drawing and inking for #5 are finished. Release timing assumes around three weeks of post-production from the latest progress update; not an announced release date.</div>
+<div class="hero-features">
+  <section class="duff-quote" aria-label="Duff Quote of the Week">
+    <div class="quote-eyebrow">✦ Duff Quote of the Week</div>
+    <blockquote id="duffQuote" aria-live="polite">“It’s RAT BANE!”</blockquote>
+    <div class="quote-caption" id="duffQuoteWeek">A new Duff quote every Monday • 26 real lines from Issues #1–4</div>
+    <img class="duff-portrait" src="duff-quote.png" alt="Duff, from Sharpest Sword" onerror="this.style.display='none';document.getElementById('duffPortraitFallback').style.display='grid'">
+    <div class="duff-portrait-fallback" id="duffPortraitFallback" aria-hidden="true">DUFF<small>Portrait: duff-quote.png</small></div>
+  </section>
+  <section class="priority-phases" aria-labelledby="priorityTitle">
+    <div class="priority-heading">
+      <div><div class="eyebrow">⚔ Current Priority</div><h2 id="priorityTitle">Issue #5 — Buried Secrets</h2></div>
+      <div class="projected">Est. release: Early December 2026</div>
+    </div>
+    <div class="phases-grid" aria-label="Issue 5 production phases">
+      <div class="phase done"><small>01 / COMPLETE</small><strong>Pre-Production ✓</strong><span>Script + cover planning</span></div>
+      <div class="phase done"><small>02 / COMPLETE</small><strong>Production ✓</strong><span>24/24 sketched • 24/24 inked</span></div>
+      <div class="phase active"><small>03 / CURRENT</small><strong>Post-Production</strong><span>Approx. 3 weeks, subject to remaining work</span></div>
+      <div class="phase pending"><small>04 / UPCOMING</small><strong>Release</strong><span>Early December target</span></div>
+    </div>
+    <p class="priority-foot">Next: prepare Issue #6 — Field Trip while coloring continues. Release estimates are planning targets, not announced dates.</p>
+  </section>
 </div>
+<div class="stats" id="stats"></div>
 <h2 class="section-title">📚 Issues <span>#1–8</span></h2>
 <div class="issue-grid" id="issues"></div>
 <section class="forecast-box" aria-labelledby="forecast-title">
@@ -140,14 +189,68 @@ footer{text-align:center;margin-top:35px;font:800 10px "Bitter",Georgia,serif;le
 </section>
 <h2 class="section-title">🗺 The <span>Road Ahead</span></h2>
 <div class="road">
-  <div class="road-card"><b>June 2027</b>Target: Issue #6 and Trade #1 release together, provided final coloring, post-production, proofing, and printing are ready.</div>
-  <div class="road-card"><b>~May 2029</b>Previous planning target: Issue #12 and Trade #2 joint release. Will need recalibration as the series progresses.</div>
-  <div class="road-card"><b>~May 2031</b>Previous planning target: Issue #18 and the end of the 18-issue production plan.</div>
+  <div class="road-card"><b>June 2027</b>Target: Issue #6 and Trade #1 together, after final coloring, proofing and printing.</div>
+  <div class="road-card"><b>November 2029</b>Planning target: Issue #12 and Trade #2 joint release.</div>
+  <div class="road-card"><b>March 2032</b>Planning target: Issue #18 and Trade #3 joint release — the end of the 18-issue series.</div>
+  <div class="road-card"><b>September 2032</b>Planning target: Complete-series omnibus.</div>
 </div>
-<footer>SHARPEST SWORD • PRODUCTION TRACKER • V4.7</footer>
+<footer>SHARPEST SWORD • PRODUCTION TRACKER • V5.5</footer>
 </div>
 <script>
 "use strict";
+
+
+// Restored from the 26 Duff lines chosen for the original V5.3/V5.4 feature.
+// A reproducible shuffle keeps the selection consistent across browsers.
+// The quote changes on Mondays (UTC) and cycles through all 26 before repeating.
+const DUFF_QUOTES = [
+ "It’s RAT BANE!",
+ "BANE SOME RATS!",
+ "Taste! The! Justice!",
+ "I don’t think there were any stairs here before…",
+ "Gotcha, you little, uh, rat.",
+ "What are you doing with your little arms?",
+ "KILLED ALL THE RATS!",
+ "GUYS! I FOUND A HOLE!",
+ "I just got why it’s called Overmine. It’s over the mine.",
+ "Yeah, The Captain says I should stop eating the cakes.",
+ "DO I GET TO NAME YOU?!",
+ "You can be Sir Hackenslash!",
+ "A mysterious explosion that no one can be blamed for opened it up.",
+ "…are you a boy sword or a girl sword?",
+ "I’m not really over Rat Bane is all…",
+ "Should I jump into the painting?",
+ "I always wanted to sit on a throne!",
+ "Hm, it’s pretty much just a normal chair with more pillows.",
+ "Also we can’t tell anyone, it’s a seeeecret.",
+ "WE’RE GOING ON AN ADVENTURE AND/OR EXPLORATORY JOURNEY!",
+ "I’m actually a guard, too.",
+ "I have two ears! But only one is an Elf ear. I’m a Half-Elf.",
+ "This one’s about the migration patterns of hummingbears. Is that helpful?",
+ "Are you on our side, or do you just have really bad aim?",
+ "Did you find it after a mysterious explosion caused a sinkhole into a lost city?",
+ "This thing is super cute when it’s not trying to eat us! Do you think they’ll let us keep him?"
+];
+function shuffledQuotes(){
+ const quotes=DUFF_QUOTES.slice();
+ let seed=20260925;
+ function rng(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;}
+ for(let i=quotes.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[quotes[i],quotes[j]]=[quotes[j],quotes[i]];}
+ return quotes;
+}
+function showWeeklyDuffQuote(){
+ const today=new Date();
+ const monday=new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate()));
+ const weekday=(monday.getUTCDay()+6)%7;
+ monday.setUTCDate(monday.getUTCDate()-weekday);
+ const base=Date.UTC(2026,8,21); // Monday, Sept 21, 2026
+ const weekNumber=Math.floor((monday.getTime()-base)/(7*86400000));
+ const quotes=shuffledQuotes();
+ const index=((weekNumber%quotes.length)+quotes.length)%quotes.length;
+ document.getElementById("duffQuote").textContent="\u201c"+quotes[index]+"\u201d";
+ document.getElementById("duffQuoteWeek").textContent="Weekly rotation · Week of "+monday.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"})+" · 26 real Duff quotes";
+}
+showWeeklyDuffQuote();
 
 // Edit these values as new progress comes in. Each issue is 24 story pages.
 const SNAPSHOT_DATE = "2026-11-12";
@@ -156,12 +259,12 @@ const ISSUES = [
  {issue:2,title:"The Talking Sword",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:24,cover:"issue-2.jpg",script:"https://docs.google.com/document/d/1IAaQTDvdaxacOI93mCu6DilTpKq-tJqgACOE34PvoI0/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
  {issue:3,title:"Welcome to Drukhovi",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:18,cover:"issue-3.jpg",script:"https://docs.google.com/document/d/1XsE3l8wtwVqwFDWK4_JZeIbWi-jYeXvWNf28u7HihE8/edit?tab=t.0#heading=h.g1mlykf10olt"},
  {issue:4,title:"Food Fight",status:"released",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"issue-4.jpg",script:"https://docs.google.com/document/d/1eagt81UAX7O9rRfQnfPbi8MwoN4yt-CMDXkLDVQJWK4/edit?tab=t.0#heading=h.h2v1y56ilzn8"},
- {issue:5,title:"Buried Secrets",status:"production",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
+ {issue:5,title:"Buried Secrets",status:"postproduction",scriptComplete:true,pages:24,sketches:24,inks:24,colors:0,cover:"Issue-5.jpg",script:"https://docs.google.com/document/d/109t7Reft4yNJjI4oo_F8-n1nEa2k1vUNSTyLOUQbM4c/edit?tab=t.0#heading=h.fntn55fixgb"},
  {issue:6,title:"Field Trip",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/109roSCnTBVE0W1jZFCcwOmrggvsy5ztg7Bl-Ssl9yFs/edit?tab=t.0#heading=h.q0smmw4sk7t4"},
  {issue:7,title:"What Happens in Stonefort",status:"preproduction",scriptComplete:true,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1FIZdi1C0Izs5sri7rZGohA_FK6SlH48fcjhPsc1Gq0A/edit?tab=t.0#heading=h.yjpvs9827n7r"},
  {issue:8,title:"Untitled",status:"script",scriptComplete:false,pages:24,sketches:0,inks:0,colors:0,cover:null,script:"https://docs.google.com/document/d/1nXkTz5Nk-3A5tLnsFV5McuC3ZHR3ko9H4UUUJUNQL8s/edit?tab=t.0"}
 ];
-const statusNames={released:"Released",production:"In Production",preproduction:"Pre-Production",script:"Script in Progress"};
+const statusNames={released:"Released",production:"In Production",postproduction:"Post-Production",preproduction:"Pre-Production",script:"Script in Progress"};
 const tradeOne=ISSUES.filter(i=>i.issue<=6);
 const totalPages=tradeOne.reduce((sum,i)=>sum+i.pages,0);
 const totalColor=tradeOne.reduce((sum,i)=>sum+i.colors,0);
@@ -207,11 +310,11 @@ function coverMarkup(i){
  return `<img class="cover" src="${file}" alt="Issue ${i.issue} cover" onerror="this.outerHTML=decodeURIComponent(this.dataset.fallback)" data-fallback="${encodeURIComponent(fallback)}">`;
 }
 document.getElementById("issues").innerHTML=ISSUES.map(i=>`
- <article class="issue ${i.status==="production"?"current-priority":""}">
+ <article class="issue ${(i.status==="production"||i.status==="postproduction")?"current-priority":""}">
    ${coverMarkup(i)}
    <div class="issue-no">Issue #${i.issue}</div><h3>${i.title}</h3>
    <span class="stamp ${i.status}">${statusNames[i.status]}</span>
-   ${i.inks===i.pages && i.status==="production"?`<span class="stamp inked">All Art Inked</span>`:""}
+   ${i.inks===i.pages && (i.status==="production"||i.status==="postproduction")?`<span class="stamp inked">All Art Inked</span>`:""}
    ${i.colors===i.pages?`<span class="stamp colored">Colored</span>`:
      progress("Sketched",i.sketches,i.pages)+progress("Inked",i.inks,i.pages)+progress("Colored",i.colors,i.pages)}
    <a class="script-link" href="${i.script}" target="_blank" rel="noopener noreferrer">Open Script ↗</a>
@@ -252,35 +355,37 @@ function renderColorForecast(){
 document.getElementById("pace").addEventListener("input",renderColorForecast);
 renderColorForecast();
 
-// The 2028–2031 targets below are inherited high-level planning estimates from V4.6.
-// They are not recalculated from the coloring slider, and should not be read as commitments.
+// Restored from the user-approved September 25, 2026 milestone plan.
+// Issue #5 release is updated to early December in response to Nov 11 completion data.
+// Later dates remain planning targets; slider projections affect coloring, NOT release commitments.
 const timeline=[
  ["#1","Rat Bane","Released",""],
  ["#2","The Talking Sword","Released",""],
- ["#3","Welcome to Drukhovi","Released in black & white","Coloring: 18 / 24 pages done as of Nov. 11, 2026"],
- ["#4","Food Fight","Released in black & white","Coloring to follow Issue #3"],
- ["#5","Buried Secrets","Sketches 24/24 • Inked 24/24 • Art complete as of Nov. 11, 2026","Post-production: ~3 weeks • estimated release: early Dec. 2026"],
- ["#6","Field Trip","Preparation: November 2026 • drawing/inking targeted Dec. 2026 → spring 2027","Coloring Alignment during #6 • Target: Issue #6 + Trade #1 joint release June 2027"],
- ["#7","What Happens in Stonefort","Pre-production: late June 2027 • Art: July → September 2027","Post-production: ~1 month • Tentative release: October 2027"],
- ["#8","Issue 8","Pre-production: October 2027 • Art: October → December 2027","Tentative release: January 2028"],
- ["#9","Issue 9","Pre-production: Jan./Feb. 2028 • Art: Feb. → April 2028","Tentative release: May 2028"],
- ["#10","Issue 10","Pre-production: May 2028 • Art: May → July/Aug. 2028","Tentative release: September 2028"],
- ["#11","Issue 11","Pre-production: September 2028 • Art: Sept. → November 2028","Tentative release: December 2028"],
- ["#12","Issue 12","Pre-production: Dec. 2028/Jan. 2029 • Art: January → March 2029","Tentative Issue #12 + Trade #2 release: May 2029"],
- ["#13","Issue 13","Pre-production: May/June 2029 • Art: June → August 2029","Tentative release: Sept./Oct. 2029"],
- ["#14","Issue 14","Pre-production: October 2029 • Art: Oct. → December 2029","Tentative release: January 2030"],
- ["#15","Issue 15","Pre-production: Jan./Feb. 2030 • Art: Feb. → April 2030","Tentative release: May 2030"],
- ["#16","Issue 16","Pre-production: May 2030 • Art: May → July/Aug. 2030","Tentative release: September 2030"],
- ["#17","Issue 17","Pre-production: September 2030 • Art: Sept. → November 2030","Tentative release: December 2030"],
- ["#18","Issue 18","Pre-production: Dec. 2030/Jan. 2031 • Art: Jan. → March 2031","Tentative issue #18 / end of series: May 2031"]
+ ["#3","Welcome to Drukhovi","Released in black & white","Coloring: 18 / 24 pages as of Nov. 11, 2026"],
+ ["#4","Food Fight","Released in black & white","Coloring follows Issue #3"],
+ ["#5","Buried Secrets","Pre-production COMPLETE • Production COMPLETE: 24/24 sketches and inks","Post-production current • estimated release early December 2026"],
+ ["#6","Field Trip","Pre-production begins late 2026 • Production + coloring alignment through spring 2027","Issue #6 + Trade #1 joint release TARGET: June 2027"],
+ ["#7","What Happens in Stonefort","Pre-production → Production → Post-production","Target release: November 2027"],
+ ["#8","Issue 8","Pre-production → Production → Post-production","Target release: February 2028"],
+ ["#9","Issue 9","Pre-production → Production → Post-production","Target release: July 2028"],
+ ["#10","Issue 10","Pre-production → Production → Post-production","Target release: December 2028"],
+ ["#11","Issue 11","Pre-production → Production → Post-production","Target release: May 2029"],
+ ["#12","Issue 12","Pre-production → Production → Post-production + trade production","Issue #12 + Trade #2 joint release TARGET: November 2029"],
+ ["#13","Issue 13","Pre-production → Production → Post-production","Target release: April 2030"],
+ ["#14","Issue 14","Pre-production → Production → Post-production","Target release: August 2030"],
+ ["#15","Issue 15","Pre-production → Production → Post-production","Target release: January 2031"],
+ ["#16","Issue 16","Pre-production → Production → Post-production","Target release: May 2031"],
+ ["#17","Issue 17","Pre-production → Production → Post-production","Target release: October 2031"],
+ ["#18","Issue 18","Pre-production → Production → Post-production + trade production","Issue #18 + Trade #3 joint release TARGET: March 2032"],
+ ["★","Complete Omnibus","After the final trade","Omnibus target: September 2032"]
 ];
 const productionModes=`<div class="production-modes">
  <h3>Production Modes & Assumptions</h3>
  <p><b>Issue #5:</b> Sketching and inking complete. Post-production estimate: 3 weeks.</p>
  <p><b>Coloring now:</b> Recent observed pace: ~2.9 pages/week (10 pages from Oct. 18 to Nov. 11). Change the slider above to model a different pace.</p>
  <p><b>Issue #6 — Coloring Alignment:</b> Original drawing plan: 1.5 sketched and 1.5 inked pages per week, with 3–4 colored pages per week as an aspirational catch-up mode.</p>
- <p><b>Issue #7 onward — School Year:</b> Original plan: 3 sketched / 3 inked / 2–3 colored pages per week. <b>Summer (June–July):</b> 2 / 2 / 2 pages per week.</p>
- <p><b>Pre-production:</b> Assume two weeks per new issue. Long-range release months are tentative and have not been recomputed from real-time production rates.</p>
+ <p><b>Issue #7 onward — School Year:</b> Agreed model: 2–3 pages sketched/inked per week during the school year. <b>Summer (June–July):</b> plan around 2 pages per week. Coloring may run in parallel.</p>
+ <p><b>Pre-production:</b> Two weeks per new issue for cover and prep; post-production generally 3–4 weeks. Long-range milestones reflect the September 2026 plan and are tentative, not recomputed by the coloring slider.</p>
  </div>`;
 document.getElementById("timeline").innerHTML=productionModes+timeline.map((t,idx)=>{
  const trade=[5,11,17].includes(idx),alignment=idx===5;
